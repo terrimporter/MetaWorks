@@ -1,6 +1,6 @@
 # README
 
-This repository contains a conda environemnt and Snakemake pipeline to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments and it is meant to be run at the command line. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI, rbcL, ITS, 16S, 18S, 12S, and 28S.  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007).  A number of trained reference sets are available for use with MetaWorks: COI eukaryotes, rbcL (eukaryotes or diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes and diatoms), 12S (fish), and 28S (fungi).  
+This repository contains a conda environment and Snakemake pipeline to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments and it is meant to be run at the command line. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI, rbcL, ITS, 16S, 18S, 12S, and 28S.  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007).  A number of trained reference sets are available for use with MetaWorks: COI eukaryotes, rbcL (eukaryotes or diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes and diatoms), 12S (fish), and 28S (fungi).  
 
 ## Overview
 
