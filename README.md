@@ -52,7 +52,7 @@ For ITS, the ITSx extractor is used to remove flanking rRNA gene sequences so th
 
 For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.12 (RDP classifier) available from https://sourceforge.net/projects/rdp-classifier/ (Wang et al., 2007).  We provide a list of RNP-trained classifiers that can be downloaded and used with MetaWorks. 
 
-Table 1.  Where to download trained RDP classifiers for a variety of popular marker gene/metabarcoding targets.
+**Table 1.  Where to download trained RDP classifiers for a variety of popular marker gene/metabarcoding targets.**
 
 | Marker | Target taxa | Classifier availability |
 | ------ | ----------- | ----------------------- |
