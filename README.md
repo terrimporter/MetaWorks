@@ -4,7 +4,7 @@ This repository contains a conda environment and Snakemake pipeline to bioinform
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  An additional program, the RDP classifier v2.12 should also be installed and it is available from https://sourceforge.net/projects/rdp-classifier .  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed and it is available from https://www.ncbi.nlm.nih.gov/orffinder . Additional instructions for installing and using conta, downloading and installing the RDP classifier and ORFfinder are available below under Implementation Notes.
+MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  An additional program, the RDP classifier v2.12 should also be installed and it is available from https://sourceforge.net/projects/rdp-classifier .  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed and it is available from https://www.ncbi.nlm.nih.gov/orffinder . Additional instructions for installing and using conda, downloading and installing the RDP classifier and ORFfinder are available below under Implementation Notes.
 
 Snakemake requires three sets of data to run: a directory containing the raw paired-end Illumina sequence files (fastq.gz), a configuration file, and the snakefile itself that describes the pipeline.
 
