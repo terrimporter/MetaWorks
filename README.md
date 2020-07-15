@@ -45,10 +45,6 @@ This data flow will be updated on a regular basis so check for the latest versio
 
 ## Pipeline details
 
-Instructions for installing and using conda are available in the Implementation Notes (Anaconda, 2016).
-
-If you are comfortable reading Python code, read through the snakefile to see how the pipeline runs as well as which programs and versions are used (Koster and Rahmann, 2012).  Otherwise you can just list all the programs in the conda environment if you would like to see which program versions have been installed, see [Implementation notes](#implementation-notes).  
-
 Raw paired-end reads are merged using SEQPREP v1.3.2 from bioconda (St. John, 2016).  This step looks for a minimum Phred quality score of 20 in the overlap region, requires at least a 25bp overlap.
 
 Primers are trimmed in two steps using CUTADAPT v2.6 from bioconda (Martin, 2011).  This step looks for a minimum Phred quality score of at least 20 at the ends, the forward primer is trimmed first based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.  The output from the first step, is used as input for the second step.  This step looks for a minimum Phred quality score of at least 20 at the ends, the reverse primer is trimmed based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.
@@ -63,7 +59,7 @@ An ESV x sample table that tracks read number for each ESV is generated with VSE
 
 For ITS, the ITSx extractor is used to remove flanking rRNA gene sequences so that subsequent analysis focuses on just the ITS1 or ITS2 spacer regions (Bengtsson-Palme et al., 2013).
 
-For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.12 (RDP classifier) available from https://sourceforge.net/projects/rdp-classifier/ (Wang et al., 2007).  We provide a list of RNP-trained classifiers that can be downloaded and used with MetaWorks. 
+For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.12 (RDP classifier).  Instructions on how to install the RDP classifier is available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  We have provided a list of RDP-trained classifiers that can be used with MetaWorks (Table 1). 
 
 **Table 1.  Where to download trained RDP classifiers for a variety of popular marker gene/metabarcoding targets.**
 
@@ -80,11 +76,11 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | ITS | Fungi (UNITE) | Built-in to the RDP classifier |
 | LSU | Fungi | Built-in to the RDP classifier |
 
-If you are using the pipeline on the rbcL marker, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 .  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
+If you are using the pipeline on a protein coding marker that does not yet have a HMM.profile, such as rbcL, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 .  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
 
-If you use the pipeline on the COI marker, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3 available from http://hmmer.org .  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
+If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
 
-The final output file is results.csv and it has been formatted to specify ESVs from each sample, read counts, ESV/ORF sequences, and column headers to improve readability.  Additional statistics and log files are also provided for each major bioinformatic step.
+The final output file is results.csv and it has been formatted to specify ESVs from each sample, read counts, ESV/ORF sequences, and column headers.  Additional statistics and log files are also provided for each major bioinformatic step.
 
 ## Prepare your environment to run the pipeline
 
