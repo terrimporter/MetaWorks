@@ -4,21 +4,28 @@ This repository contains a conda environment and Snakemake pipeline to bioinform
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  An additional program, the RDP classifier v2.12 should also be installed and it is available from https://sourceforge.net/projects/rdp-classifier .  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed and it is available from https://www.ncbi.nlm.nih.gov/orffinder . Instructions for downloading and installing the RDP classifier and the NCBI ORFfinder are available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  Additional instructions for installing and using conda, downloading and installing the RDP classifier and ORFfinder are available below under [Implementation notes](#implementation-notes).
+MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager. For first time users, it will be necessary to download and install conda and instructions are available below under [Implementation notes](#implementation-notes).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Instructions for downloading and installing the RDP classifier and the NCBI ORFfinder are available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  
 
 Snakemake requires three sets of data to run: a directory containing the raw paired-end Illumina sequence files (fastq.gz), a configuration file, and the snakefile itself that describes the pipeline.
 
 The user should edit the configuration file to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
 
-The user also needs to install the appropriate RDP-trained classifier (see Table 1 below).
+The user will may also need to install the appropriate RDP-trained reference set if it's not already built in to the RDP classifier (see Table 1 below).
 
-The snakefile describes the pipeline itself and normally does not need to be edited in any way.  The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed, such as rbcL, then denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If COI is being processed denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short HMM scores.
+The snakefile describes the pipeline itself and normally does not need to be edited in any way.  The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.
 
 This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
 
 ## How to cite
 
-If you use this dataflow or any of the provided scripts, consider citing the CO1 classifier paper (Porter & Hajibabaei, 2018 Sci Rep) if it is used and provide a link to this page https://github.com/terrimporter/MetaWorks in your publication.
+If you use this dataflow or any of the provided scripts, consider citing the MetaWorks preprint:
+Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv: xxx.
+
+If you use this dataflow for making COI taxonomic assignments, consider citing the COI classifier publication:
+Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
+
+If you use the RDP classifier, please cite the publication:
+Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
 ## Outline
 
@@ -295,6 +302,7 @@ Rognes, T., Flouri, T., Nichols, B., Quince, C., & Mahé, F. (2016). VSEARCH: a 
 St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstjohn/SeqPrep/releases  
 
 Tange, O. (2011). GNU Parallel - The Command-Line Power Tool. ;;Login: The USENIX Magazine, February, 42–47.  
+
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
 Last updated: July 15, 2020
