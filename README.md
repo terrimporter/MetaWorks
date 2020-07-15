@@ -18,13 +18,13 @@ This data flow will be updated on a regular basis so check for the latest versio
 
 ## How to cite
 
-If you use this dataflow or any of the provided scripts, consider citing the MetaWorks preprint:
+If you use this dataflow or any of the provided scripts, consider citing the MetaWorks preprint:  
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv: xxx.
 
-If you use this dataflow for making COI taxonomic assignments, consider citing the COI classifier publication:
+If you use this dataflow for making COI taxonomic assignments, consider citing the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
 
-If you use the RDP classifier, please cite the publication:
+If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
 ## Outline
