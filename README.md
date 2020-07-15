@@ -4,7 +4,7 @@ This repository contains a conda environment and Snakemake pipeline to bioinform
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  An additional program, the RDP classifier v2.12 should also be installed and it is available from https://sourceforge.net/projects/rdp-classifier .  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed and it is available from https://www.ncbi.nlm.nih.gov/orffinder . Additional instructions for installing and using conda, downloading and installing the RDP classifier and ORFfinder are available below under Implementation Notes.
+MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  An additional program, the RDP classifier v2.12 should also be installed and it is available from https://sourceforge.net/projects/rdp-classifier .  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed and it is available from https://www.ncbi.nlm.nih.gov/orffinder . Instructions for downloading and installing the RDP classifier and the NCBI ORFfinder are available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  Additional instructions for installing and using conda, downloading and installing the RDP classifier and ORFfinder are available below under [Implementation notes](#implementation-notes).
 
 Snakemake requires three sets of data to run: a directory containing the raw paired-end Illumina sequence files (fastq.gz), a configuration file, and the snakefile itself that describes the pipeline.
 
@@ -88,7 +88,35 @@ conda activate MetaWorks_v1
 source ~/miniconda/bin/activate MetaWorks_v1
 ```
 
-2. The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your path.
+### Download and install the RDP Classifier v2.12
+
+2. The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
+
+```linux
+
+# decompress the file
+unzip rdp_classifier_2.12.zip
+
+```
+
+Make a note of where the application is saved so this can be added to the config.yaml file.
+
+```linux
+RDP:
+    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+```
+
+The RDP classifier comes with the training sets to classify 16S, fungal ITS, and fungal LSU rDNA sequences.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
+
+```linux
+RDP:
+    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+    t: "/path/to/CO1Classifier/v4/NCBI_BOLD_merged/mydata/mydata_trained/rRNAClassifier.properties"
+```
+
+### If doing pseudogene filtering, then download and install the NCBI ORFfinder
+
+3. The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your path.
 
 ```linux
 # download
@@ -111,16 +139,6 @@ ORFfinder
 ```
 
 If you get an error that requries a GLIBC_2.14 libc.so.6 library, then follow the instructions at [Use conda's libc library for NCBI's ORFfinder](#use-condas-libc-library-for-ncbis-orffinder).
-
-3. The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge at https://sourceforge.net/projects/rdp-classifier/ .  Download it and take note of where the classifier.jar file is as this needs to be added to config.yaml .
-
-The RDP classifier comes with the training sets to classify 16S, fungal ITS, and fungal LSU rDNA sequences.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
-
-```linux
-RDP:
-    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
-    t: "/path/to/CO1Classifier/v4/NCBI_BOLD_merged/mydata/mydata_trained/rRNAClassifier.properties"
-```
 
 4. In most cases, your raw paired-end Illumina reads can go into a directory called 'data' which should be placed in the same directory as the other files that come with this pipeline.
 
@@ -168,20 +186,6 @@ source ~/miniconda3/bin/activate SCVUCv4.3
 # Activate conda method 2
 conda activate SCVUCv4.3
 ```
-
-### Download and install the RDP Classifier v2.12
-
-Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
-
-```linux
-
-# decompress the file
-unzip rdp_classifier_2.12.zip
-
-```
-
-Make a note of where the application is saved so this can be added to the configuration file:
-/path/to/rdp_classifier.2.12/dist/classifier.jar
 
 ### Check program versions
 
@@ -293,4 +297,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 Tange, O. (2011). GNU Parallel - The Command-Line Power Tool. ;;Login: The USENIX Magazine, February, 42–47.  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: June 25, 2020
+Last updated: July 15, 2020
