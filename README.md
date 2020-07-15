@@ -1,6 +1,6 @@
 # MetaWorks
 
-MetaWorks consists of a conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007). 
+MetaWorks consists of a Conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007). 
 
 
 ## How to cite
@@ -28,9 +28,9 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager.  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed it not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed it not already built in to the RDP classifier (see Table 1 below).
 
-Snakemake is a python-based workflow manager and it requires three sets of files to run:   
+Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run:   
 1) raw paired-end Illumina sequence files,  
 2) the configuration file,
 3) the snakefile.  
