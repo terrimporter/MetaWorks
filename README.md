@@ -1,20 +1,7 @@
 # README
 
-This repository contains a conda environment and Snakemake pipeline to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments and it is meant to be run at the command line. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI, rbcL, ITS, 16S, 18S, 12S, and 28S.  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007).  A number of trained reference sets are available for use with MetaWorks: COI eukaryotes, rbcL (eukaryotes or diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes and diatoms), 12S (fish), and 28S (fungi).  
+This repository contains a conda environment and Snakemake pipeline to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments and it is meant to be run at the command line. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank (Wang et al., 2007). 
 
-## Overview
-
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager. For first time users, it will be necessary to download and install conda and instructions are available below under [Implementation notes](#implementation-notes).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Instructions for downloading and installing the RDP classifier and the NCBI ORFfinder are available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  
-
-Snakemake requires three sets of data to run: a directory containing the raw paired-end Illumina sequence files (fastq.gz), a configuration file, and the snakefile itself that describes the pipeline.
-
-The user should edit the configuration file to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
-
-The user will may also need to install the appropriate RDP-trained reference set if it's not already built in to the RDP classifier (see Table 1 below).
-
-The snakefile describes the pipeline itself and normally does not need to be edited in any way.  The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.
-
-This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
 
 ## How to cite
 
@@ -29,6 +16,8 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Outline
 
+[Overview](#overview)  
+
 [Pipeline details](#pipeline-details)  
 
 [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline)   
@@ -36,6 +25,23 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 [Implementation notes](#implementation-notes)  
 
 [References](#references)  
+
+## Overview
+
+MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager.  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed it not already built in to the RDP classifier (see Table 1 below).
+
+Snakemake is a python-based workflow manager and it requires three sets of files to run:   
+1) raw paired-end Illumina sequence files,  
+2) the configuration file,
+3) the snakefile.  
+
+The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
+
+The snakefile describes the pipeline itself and normally does not need to be edited in any way.  
+
+The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.
+
+This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
 
 ## Pipeline details
 
