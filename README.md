@@ -88,9 +88,9 @@ conda activate MetaWorks_v1
 source ~/miniconda/bin/activate MetaWorks_v1
 ```
 
-### Download and install the RDP Classifier v2.12
+2. Download and install the RDP Classifier v2.12
 
-2. The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
+The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
 
 ```linux
 
@@ -114,9 +114,9 @@ RDP:
     t: "/path/to/CO1Classifier/v4/NCBI_BOLD_merged/mydata/mydata_trained/rRNAClassifier.properties"
 ```
 
-### If doing pseudogene filtering, then download and install the NCBI ORFfinder
+3. If doing pseudogene filtering, then download and install the NCBI ORFfinder
 
-3. The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your path.
+The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your path.
 
 ```linux
 # download
