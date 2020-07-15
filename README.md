@@ -169,6 +169,20 @@ source ~/miniconda3/bin/activate SCVUCv4.3
 conda activate SCVUCv4.3
 ```
 
+### Download and install the RDP Classifier v2.12
+
+Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
+
+```linux
+
+# decompress the file
+unzip rdp_classifier_2.12.zip
+
+```
+
+Make a note of where the application is saved so this can be added to the configuration file:
+/path/to/rdp_classifier.2.12/dist/classifier.jar
+
 ### Check program versions
 
 Ensure the program versions in the environment are being used.
