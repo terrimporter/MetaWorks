@@ -206,10 +206,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate SCVUCv4.3
+source ~/miniconda3/bin/activate MetaWorks_v1
 
 # Activate conda method 2
-conda activate SCVUCv4.3
+conda activate MetaWorks_v1
 ```
 
 ### Check program versions
@@ -221,7 +221,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate SCVUCv4.3
+conda activate MetaWorks_v1
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -241,9 +241,9 @@ Version numbers are also tracked in the snakefile.
 
 ### Use conda's libc library for NCBI's ORFfinder
 
-The glibc 2.14 library is already available in the SCVUCv4.3 environment.  The LD_LIBRARY_PATH environment variable will need to be activated (and deactivated) by adding the following scripts as follows:
+The glibc 2.14 library is already available in the MetaWorks_v1 environment.  The LD_LIBRARY_PATH environment variable will need to be activated (and deactivated) by adding the following scripts as follows:
 
-Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/SCVUCv4.3/etc/conda/activate.d/LD_PATH.sh
+Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1/etc/conda/activate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -252,7 +252,7 @@ export LD_LIBRARY_PATH_CONDA_BACKUP=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib64:$LD_LIBRARY_PATH
 ```
 
-Create the file LD_PATH.sh in the following location to unset the environment variable: ~/miniconda3/envs/SCVUCv4.3/etc/conda/deactivate.d/LD_PATH.sh
+Create the file LD_PATH.sh in the following location to unset the environment variable: ~/miniconda3/envs/MetaWorks_v1/etc/conda/deactivate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -263,7 +263,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CONDA_BACKUP
 Create a symbolic link to the library:
 
 ```linux
-cd ~/miniconda3/envs/SCVUCv4.3/lib64
+cd ~/miniconda3/envs/MetaWorks_v1/lib64
 ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
 ```
 
