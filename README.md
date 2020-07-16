@@ -29,20 +29,26 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed it not already built in to the RDP classifier (see Table 1 below).
 
-Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run:   
+Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1):   
 1) raw paired-end Illumina sequence files,  
 2) the configuration file,
 3) the snakefile.  
+
+**Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.**. 
 
 <img src="/images/conda_env.png" width="500">
 
 The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
 
-The snakefile describes the pipeline itself and normally does not need to be edited in any way.  
+The snakefile describes the pipeline itself (Fig 2) and normally does not need to be edited in any way.  
+
+**Fig 2. The snakefile describes the dataflow.**
 
 <img src="/images/dataflow.png" width="500">
 
-The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support.
+The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support (Fig 3).
+
+**Fig 3. The RDP classifier produces a measure of confidence for taxonomic assignments at each rank.**  Results can be filtered by bootstrap support values to reduce false-positive assignments.  The appropriate cutoffs to use for filtering will depend on the marker/classifier used, query length, and taxonomic rank.  See links in Table 1 for classifier-specific cutoffs to ensure 95-99% accuracy.
 
 <img src="/images/taxonomic_assignments.png" width="500">
 
