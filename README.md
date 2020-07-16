@@ -34,7 +34,7 @@ Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it r
 2) the configuration file,
 3) the snakefile.  
 
-![](/images/conda_environment.png)
+![](/images/conda_env.png)
 
 The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
 
