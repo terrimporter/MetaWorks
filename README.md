@@ -37,7 +37,12 @@ Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it r
 
 The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
 
-The snakefile describes the pipeline itself and normally does not need to be edited in any way.  
+The snakefile describes the pipeline itself and normally does not need to be edited in any way (Fig 1).  
+
+**Figure 1.  Overview of MetaWorks bioinformatic pipeline.**   
+From Porter and Hajibabaei, 2020 BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
+
+![MetaWorksOverview](/images/overview.jpg)
 
 The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.
 
