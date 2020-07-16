@@ -37,7 +37,9 @@ Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it r
 
 The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
 
-The snakefile describes the pipeline itself and normally does not need to be edited in any way.  
+The snakefile describes the pipeline itself and normally does not need to be edited in any way (Fig 1).  
+
+**Figure 1.  Overview of MetaWorks bioinformatic pipeline.  From Porter and Hajibabaei, 2020 BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.**
 
 ![MetaWorksOverview](/images/overview.jpg)
 
