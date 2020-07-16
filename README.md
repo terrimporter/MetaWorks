@@ -323,4 +323,4 @@ Tange, O. (2011). GNU Parallel - The Command-Line Power Tool. ;;Login: The USENI
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: July 15, 2020
+Last updated: July 16, 2020
