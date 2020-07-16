@@ -39,7 +39,8 @@ The configuration file is edited by the user to specify directory names, indicat
 
 The snakefile describes the pipeline itself and normally does not need to be edited in any way (Fig 1).  
 
-**Figure 1.  Overview of MetaWorks bioinformatic pipeline.**  From Porter and Hajibabaei, 2020 BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
+**Figure 1.  Overview of MetaWorks bioinformatic pipeline.**   
+From Porter and Hajibabaei, 2020 BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
 ![MetaWorksOverview](/images/overview.jpg)
 
