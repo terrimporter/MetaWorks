@@ -25,6 +25,8 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 [Implementation notes](#implementation-notes)  
 
+[Tutorial](#tutorial)
+
 [References](#references)  
 
 ## Overview
@@ -188,7 +190,7 @@ conda deactivate
 
 ## Implementation notes
 
-### Installing Conda and Snakemake
+### Installing Conda
 
 Conda is an open source package and environment management system.  Miniconda is a lightweight version of conda that only contains conda, python, and their dependencies.  Using conda and the environment.yml file provided here can help get all the necessary programs in one place to run this pipeline.  Snakemake is a Python-based workflow management tool meant to define the rules for running this bioinformatic pipeline.  There is usually no need to edit the snakefile file directly.  Changes to select parameters can be made in the config.yaml file.  If you install conda and activate the environment provided, then you will also get the correct versions of the open source programs used in this pipeline including Snakemake.
 
@@ -291,6 +293,27 @@ ln -s /path/to/target/directory fileName
 ln -s /path/to/script/script.sh commandName
 ```
 
+## Tutorial
+
+We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
+
+**Step 1.  Prepare your environment for the pipeline.**
+
+If you don't already have conda on your system, then begin by following the instructions for installing conda under Implementation notes (above).
+
+Activate the MetaWorks_v1 environment
+
+```linux
+
+conda activate MetaWorks_v1
+
+```
+
+If you don't already have the RDP classifier v2.12 on your system, then follow the instructions for installing the classifier under Prepare your environment to run the pipeline (above).
+
+We will also be doing pseudogene filtering, so if you don't already have ORFfinder on your system, then follow the instructions for installing ORFfinder under Prepare your environment to run the pipeline (above).
+
+
 ## References
 
 Anaconda (2016).  Anaconda Software Distribution.  Available: https://anaconda.com 
@@ -300,6 +323,10 @@ Bengtsson-Palme J, Ryberg M, Hartmann M, Branco S, Wang Z, Godhe A, et al. (2013
 Edgar, R. C. (2016). UNOISE2: improved error-correction for Illumina 16S and ITS amplicon sequencing. BioRxiv. doi:10.1101/081257  
 
 Gergely, S. (2018, January). Perl-rename. Retrieved from https://github.com/subogero/rename  
+
+Gibson, J., Shokralla, S., Porter, T. M., King, I., Konynenburg, S. van, Janzen, D. H., … Hajibabaei, M. (2014). Simultaneous assessment of the macrobiome and microbiome in a bulk sample of tropical arthropods through DNA metasystematics. Proceedings of the National Academy of Sciences, 111(22), 8007–8012. doi: 10.1073/pnas.1406468111
+
+Hajibabaei, M., Spall, J. L., Shokralla, S., & van Konynenburg, S. (2012). Assessing biodiversity of a freshwater benthic macroinvertebrate community through non-destructive environmental barcoding of DNA from preservative ethanol. BMC Ecology, 12, 28. doi: 10.1186/1472-6785-12-28
 
 Iwasaki W, Fukunaga T, Isagozawa R, Yamada K, Maeda Y, Satoh TP, et al.( 2013) MitoFish and MitoAnnotator: A Mitochondrial Genome Database of Fish with an Accurate and Automatic Annotation Pipeline. Molecular Biology and Evolution, 30:2531–40. 
 
