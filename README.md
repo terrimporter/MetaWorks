@@ -212,12 +212,12 @@ source ~/miniconda3/bin/activate MetaWorks_v1
 conda activate MetaWorks_v1
 ```
 
-### Check program versions
+### Checking program versions
 
 Ensure the program versions in the environment are being used.
 
 ```linux
-# create conda environment from file
+# Create conda environment from file.  Only need to do this once.
 conda env create -f environment.yml
 
 # activate the environment
@@ -290,6 +290,35 @@ ln -s /path/to/target/directory shortcutName
 ln -s /path/to/target/directory fileName
 ln -s /path/to/script/script.sh commandName
 ```
+
+### Prevent errors caused by lost network connections
+
+Large jobs with many fastq.gz files can take a while to run.  To prevent unexpected network connection interruptions from stopping the MetaWorks pipeline, set the job up to run in the background:
+
+1. You can use nohup (no hangup)
+
+```linux
+nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
+```
+
+2. You can use screen
+
+```linux
+# to start a screen session
+screen
+ctrl+a+c
+conda activate MetaWorks_v1
+snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
+ctrl+a+d
+
+# to list all screen session ids, look at top of the list
+screen -ls
+
+# to re-enter a screen session to watch job progress or view error messages
+screen -r session_id
+```
+
+3. You can submit your job to the queuing system if you use one.
 
 ## Tutorial
 
