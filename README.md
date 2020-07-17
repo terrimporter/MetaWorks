@@ -299,20 +299,62 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-If you don't already have conda on your system, then begin by following the instructions for installing conda under [Installing conda](#installing-conda).
-
-Activate the MetaWorks_v1 environment
+Begin by downloading the lastest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.1.0 by using wget from the command line:
 
 ```linux
+# download the pipeline
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.1.0/v1.1.0.zip
 
-conda activate MetaWorks_v1
-
+# unzip the pipeline
+unzip v1.1.0.zip
 ```
 
-If you don't already have the RDP classifier v2.12 on your system, then follow the instructions for installing the classifier under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
+If you don't already have conda on your system, then you will need to install it:
 
-We will also be doing pseudogene filtering, so if you don't already have ORFfinder on your system, then follow the instructions for installing ORFfinder under Prepare your environment to run the pipeline (above).
+```linux
+# Download miniconda3
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
+# Install miniconda3 and initialize
+sh Miniconda3-latest-Linux-x86_64.sh
+
+# Add conda to your PATH
+# If you do not have a bin folder in your home directory, then create one first.
+mkdir ~/bin
+
+# Enter bin folder
+cd ~/bin
+
+# Create symbolic link to conda
+ln -s ~/miniconda3/bin/conda conda
+```
+
+Create then activate the MetaWorks_v1 environment:
+
+```linux
+# Move into the MetaWorks folder
+cd v1.1.0
+
+# Create the environment from the provided environment.yml file .  Only need to do this step once.
+conda env create -f environment.yml
+
+# Activate the environment.  Do this everytime before running the pipeline.
+conda activate MetaWorks_v1
+```
+
+If you do not already have the RDP classifier installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #2.
+
+If you do not already have the NCBI ORFfinder installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #3.
+
+**Step 2.  Run MetaWorks using the COI testing data provided.**
+
+```linux
+# You may need to edit the number of jobs you would like to run, ex --jobs 1 or --jobs 4, according to how many cores you have available
+snakemake --jobs 2 --snakefile snakefile --configfile config_testing_COI_data.yaml
+```
+
+**Step 3.  Analyze the output.**
+The final output file is called results.csv .  This can be imported into R for filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
 
 ## References
 
@@ -348,4 +390,4 @@ Tange, O. (2011). GNU Parallel - The Command-Line Power Tool. ;;Login: The USENI
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: July 16, 2020
+Last updated: July 17, 2020
