@@ -105,7 +105,7 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 1. This pipeline includes a conda environment that provides most of the programs needed to run this pipeline (SNAKEMAKE, SEQPREP, CUTADAPT, VSEARCH, etc.).
 
 ```linux
-# Create the environment from the provided environment.yml file .  Only need to do this step once.
+# Create the environment from the provided environment.yml file.  Only need to do this step once.
 conda env create -f environment.yml
 
 # Activate the environment
