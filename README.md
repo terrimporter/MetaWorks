@@ -340,9 +340,21 @@ conda env create -f environment.yml
 conda activate MetaWorks_v1
 ```
 
-If you do not already have the RDP classifier installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #2.
+If you do not already have the RDP classifier installed on your system, download and install the RDP Classifier v2.12.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
 
-You will also need to install the COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  Do this at the command line using wget.
+```linux
+# decompress the file
+unzip rdp_classifier_2.12.zip
+```
+
+Make a note of where the application is saved so this can be added to the config_testing_COI_data.yaml file.
+
+```linux
+RDP:
+    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+```
+
+You will also need to install the COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
 
 ```linux
 # download the COIv4 classifier
@@ -351,23 +363,51 @@ wget https://github.com/terrimporter/CO1Classifier/releases/download/v4/CO1v4_tr
 # decompress the file
 tar -xvzf CO1v4_trained.tar.gz
 
-# Enter the directory and note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
-pwd
+# Note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
 ```
 
-If you do not already have the NCBI ORFfinder installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #3.
+If you do not already have the NCBI ORFfinder installed on your system, then download it from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  You can download it using wget then make it executable in your path:
+
+```linux
+# download
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
+
+# decompress
+gunzip ORFfinder.gz
+
+# make executable
+chmod 755 ORFfinder
+
+# If you do not have a bin folder in your home directory, then create one first.
+mkdir ~/bin
+
+# put in your PATH (ex. ~/bin).
+mv ORFfinder ~/bin/.
+```
 
 **Step 2.  Run MetaWorks using the COI testing data provided.**
 
-The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, need to update your path to the RDP classifier and the trained COI classifier.
+The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, still need to update your path to the RDP classifier and the trained COI classifier and save your changes.
 
+```linux
+RDP:
+# enter the path to the RDP classifier 'classifier.jar' file here:
+    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+
+# If you are using a custom-trained reference set 
+# enter the path to the trained RDP classifier rRNAClassifier.properties file here:
+    t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
+```    
+  
+Then you should be ready to run the MetaWorks pipeline on the testing data.
+    
 ```linux
 # You may need to edit the number of jobs you would like to run, ex --jobs 1 or --jobs 4, according to how many cores you have available
 snakemake --jobs 2 --snakefile snakefile --configfile config_testing_COI_data.yaml
 ```
 
 **Step 3.  Analyze the output.**
-The final output file is called results.csv .  This can be imported into R for filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
+The final output file is called results.csv .  The results are for the COI-BR5 amplicon.  This can be imported into R for bootstrap support filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
 
 ## References
 
