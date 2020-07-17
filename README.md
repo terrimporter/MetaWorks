@@ -295,9 +295,7 @@ ln -s /path/to/script/script.sh commandName
 
 Anaconda (2016).  Anaconda Software Distribution.  Available: https://anaconda.com 
 
-Bengtsson-Palme J, Ryberg M, Hartmann M, Branco S, Wang Z, Godhe A, et al. (2013) Improved software detection and extraction of ITS1 and ITS2 from ribosomal ITS sequences of fungi and other eukaryotes for analysis of environmental sequencing data.  
-
-Bunce M, editor. Methods in Ecology and Evolution, 4: 914–919. doi:10.1111/2041-210X.12073  
+Bengtsson-Palme J, Ryberg M, Hartmann M, Branco S, Wang Z, Godhe A, et al. (2013) Improved software detection and extraction of ITS1 and ITS2 from ribosomal ITS sequences of fungi and other eukaryotes for analysis of environmental sequencing data.  Methods in Ecology and Evolution, 4: 914–919. doi:10.1111/2041-210X.12073  
 
 Edgar, R. C. (2016). UNOISE2: improved error-correction for Illumina 16S and ITS amplicon sequencing. BioRxiv. doi:10.1101/081257  
 
