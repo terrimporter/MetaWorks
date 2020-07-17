@@ -293,15 +293,15 @@ ln -s /path/to/script/script.sh commandName
 
 ### Prevent errors caused by lost network connections
 
-Large jobs with many fastq.gz files can take a while to run.  To prevent unexpected network connection interruptions from stopping the MetaWorks pipeline, set the job up to run in the background:
+Large jobs with many fastq.gz files can take a while to run.  To prevent unexpected network connection interruptions from stopping the MetaWorks pipeline, set the job up to keep running even if you disconnect from your session:
 
-1. You can use nohup (no hangup)
+1. You can use nohup (no hangup).
 
 ```linux
 nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ```
 
-2. You can use screen
+2. You can use screen.
 
 ```linux
 # to start a screen session
