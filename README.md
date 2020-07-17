@@ -309,7 +309,7 @@ conda activate MetaWorks_v1
 
 ```
 
-If you don't already have the RDP classifier v2.12 on your system, then follow the instructions for installing the classifier under [Prepare your environment to run the pipeline](##prepare-your-environment-to-run-the-pipeline).
+If you don't already have the RDP classifier v2.12 on your system, then follow the instructions for installing the classifier under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
 
 We will also be doing pseudogene filtering, so if you don't already have ORFfinder on your system, then follow the instructions for installing ORFfinder under Prepare your environment to run the pipeline (above).
 
