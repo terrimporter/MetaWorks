@@ -409,6 +409,12 @@ snakemake --jobs 2 --snakefile snakefile --configfile config_testing_COI_data.ya
 **Step 3.  Analyze the output.**
 The final output file is called results.csv .  The results are for the COI-BR5 amplicon.  This can be imported into R for bootstrap support filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
 
+If you are done with MetaWorks, deactivate the conda environment:
+
+```linux
+conda deactivate
+```
+
 ## References
 
 Anaconda (2016).  Anaconda Software Distribution.  Available: https://anaconda.com 
