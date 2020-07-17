@@ -299,7 +299,7 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-If you don't already have conda on your system, then begin by following the instructions for installing conda under [Implementation notes](#implementation-notes).
+If you don't already have conda on your system, then begin by following the instructions for installing conda under [Installing conda](#installing-conda).
 
 Activate the MetaWorks_v1 environment
 
