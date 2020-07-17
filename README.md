@@ -297,7 +297,7 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the lastest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.1.0 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.1.0 by using wget from the command line:
 
 ```linux
 # download the pipeline
