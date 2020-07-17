@@ -47,7 +47,7 @@ The snakefile describes the pipeline itself and normally does not need to be edi
 
 
 **Fig 2. The snakefile describes the programs used, the settings, and the order in which to run commands.**  
-The pipeline takes care of any reformatting needed when moving from one step to another.  In additional to the final results file, a summary of statistics and log files are also available for major steps in the pipeline.
+The pipeline takes care of any reformatting needed when moving from one step to another.  In addition to the final results file, a summary of statistics and log files are also available for major steps in the pipeline.
 
 <img src="/images/dataflow.png" width="500">
 
