@@ -117,13 +117,11 @@ source ~/miniconda/bin/activate MetaWorks_v1
 
 2. Download and install the RDP Classifier v2.12
 
-The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file where you want it.  
+The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
 
 ```linux
-
 # decompress the file
 unzip rdp_classifier_2.12.zip
-
 ```
 
 Make a note of where the application is saved so this can be added to the config.yaml file.
@@ -344,9 +342,24 @@ conda activate MetaWorks_v1
 
 If you do not already have the RDP classifier installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #2.
 
+You will also need to install the COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  Do this at the command line using wget.
+
+```linux
+# download the COIv4 classifier
+wget https://github.com/terrimporter/CO1Classifier/releases/download/v4/CO1v4_trained.tar.gz
+
+# decompress the file
+tar -xvzf CO1v4_trained.tar.gz
+
+# Enter the directory and note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
+pwd
+```
+
 If you do not already have the NCBI ORFfinder installed on your system, then go to [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline) and do step #3.
 
 **Step 2.  Run MetaWorks using the COI testing data provided.**
+
+The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, need to update your path to the RDP classifier and the trained COI classifier.
 
 ```linux
 # You may need to edit the number of jobs you would like to run, ex --jobs 1 or --jobs 4, according to how many cores you have available
