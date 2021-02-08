@@ -31,7 +31,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1.3.2 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.13 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.3.2 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
 
@@ -52,7 +52,7 @@ The pipeline takes care of any reformatting needed when moving from one step to 
 <img src="/images/dataflow.png" width="500">
 
 
-The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed but there is no HMM profile available (yet), such as with rbcL, then the denoised ESVs are translated and the longest open reading frames (ORFs) are retained.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually short or long sequence lengths.  If a HMM profile is available, such as with COI, then denoised ESVs are translated and the longest ORFs are subjected to hidden Markov model (HMM) profile analysis.  Obvious pseudogenes, or sequences with errors, are identified as outliers with unusually low HMM scores.  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support (Fig 3).
+The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed you have the option to filter out putative pseudogenes (Porter and Hajibabaei, 2021).  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support (Fig 3).
 
 
 **Fig 3. The RDP classifier produces a measure of confidence for taxonomic assignments at each rank.**  
@@ -77,7 +77,7 @@ An ESV x sample table that tracks read number for each ESV is generated with VSE
 
 For ITS, the ITSx extractor is used to remove flanking rRNA gene sequences so that subsequent analysis focuses on just the ITS1 or ITS2 spacer regions (Bengtsson-Palme et al., 2013).
 
-For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.13 (RDP classifier).  Instructions on how to install the RDP classifier is available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  We have provided a list of RDP-trained classifiers that can be used with MetaWorks (Table 1). 
+For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.13 (RDP classifier).  We have provided a list of RDP-trained classifiers that can be used with MetaWorks (Table 1). 
 
 **Table 1.  Where to download trained RDP classifiers for a variety of popular marker gene/metabarcoding targets.**
 
@@ -115,27 +115,10 @@ conda activate MetaWorks_v1.3.2
 source ~/miniconda/bin/activate MetaWorks_v1.3.2
 ```
 
-2. Download and install the RDP Classifier v2.13
-
-The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.13 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
-
-```linux
-# decompress the file
-unzip rdp_classifier_2.13.zip
-```
-
-Make a note of where the application is saved so this can be added to the config.yaml file.
+2. The RDP classifier comes with the training sets to classify 16S, fungal LSU or ITS rDNA.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
 
 ```linux
 RDP:
-    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
-```
-
-The RDP classifier comes with the training sets to classify 16S, fungal ITS (LSU or ITS-Warcup), and fungal LSU rDNA sequences.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
-
-```linux
-RDP:
-    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
     t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
 ```
 
@@ -221,7 +204,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v13.2
+conda activate MetaWorks_v1.3.2
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -356,7 +339,7 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 ```
 
-Create then activate the MetaWorks_v1 environment:
+Create then activate the MetaWorks_v1.3.2 environment:
 
 ```linux
 # Move into the MetaWorks folder
@@ -366,24 +349,10 @@ cd v1.3.2
 conda env create -f environment.yml
 
 # Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1
+conda activate MetaWorks_v1.3.2
 ```
 
-If you do not already have the RDP classifier installed on your system, download and install the RDP Classifier v2.13.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
-
-```linux
-# decompress the file
-unzip rdp_classifier_2.13.zip
-```
-
-Make a note of where the application is saved so this can be added to the config_testing_COI_data.yaml file.
-
-```linux
-RDP:
-    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
-```
-
-You will also need to install the COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
+To taxonomically assign COI metabarocodes, you will  need to install the RDP-trained COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
 
 ```linux
 # download the COIv4 classifier
@@ -395,7 +364,7 @@ tar -xvzf CO1v4_trained.tar.gz
 # Note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
 ```
 
-If you do not already have the NCBI ORFfinder installed on your system, then download it from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  You can download it using wget then make it executable in your path:
+If you wish to filter out putative pseudogenes, if you do not already have the NCBI ORFfinder installed on your system, then download it from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  You can download it using wget then make it executable in your path:
 
 ```linux
 # download
@@ -416,13 +385,10 @@ mv ORFfinder ~/bin/.
 
 **Step 2.  Run MetaWorks using the COI testing data provided.**
 
-The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, still need to update your path to the RDP classifier and the trained COI classifier and save your changes.
+The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, still need to add the path to the trained COI classifier and save your changes.
 
 ```linux
 RDP:
-# enter the path to the RDP classifier 'classifier.jar' file here:
-    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
-
 # If you are using a custom-trained reference set 
 # enter the path to the trained RDP classifier rRNAClassifier.properties file here:
     t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
