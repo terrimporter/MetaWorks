@@ -1,6 +1,6 @@
 # MetaWorks
 
-MetaWorks consists of a Conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
+MetaWorks consists of a conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
 This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
 
@@ -31,7 +31,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.12 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.3.2 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  An additional program, the RDP classifier v2.13 should also be installed to make the taxonomic assignments.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
 
@@ -65,11 +65,11 @@ Results can be filtered by bootstrap support values to reduce false-positive ass
 
 Raw paired-end reads are merged using SEQPREP v1.3.2 from bioconda (St. John, 2016).  This step looks for a minimum Phred quality score of 13 in the overlap region, requires at least a 25bp overlap.  Using Phred quality cutoff of 13 at this step is actually more stringent than using a Phred quality score cutoff of 20 at this step as more bases will exceed the cutoff when aligning the paired reads and more mismatches (if present) are counted.
 
-Primers are trimmed in two steps using CUTADAPT v2.6 from bioconda (Martin, 2011).  This step looks for a minimum Phred quality score of at least 20 at the ends, the forward primer is trimmed first based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.  The output from the first step, is used as input for the second step.  This step looks for a minimum Phred quality score of at least 20 at the ends, the reverse primer is trimmed based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.
+Primers are trimmed in two steps using CUTADAPT v3.2 from bioconda (Martin, 2011).  This step looks for a minimum Phred quality score of at least 20 at the ends, the forward primer is trimmed first based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.  The output from the first step, is used as input for the second step.  This step looks for a minimum Phred quality score of at least 20 at the ends, the reverse primer is trimmed based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.
 
 Files are reformatted and samples are combined for a global analysis.
 
-Reads are dereplicated (only unique sequences are retained) using VSEARCH v2.14.1 from bioconda (Rognes et al., 2016).
+Reads are dereplicated (only unique sequences are retained) using VSEARCH v2.15.2 from bioconda (Rognes et al., 2016).
 
 Zero-radius OTUS (Zotus) are generated using VSEARCH with the unoise3 algorithm (Edgar, 2016).  They are similar to OTUs delimited by 100% sequence similarity, except that they are also error-corrected and rare clusters are removed.  Here, we define rare sequences to be sequence clusters containing only one or two reads (singletons and doubletons) and these are also removed as 'noise'.  We refer to these sequence clusters as exact sequence variants (ESVs) for clarity.  For comparison, the error-corrected sequence clusters generated by DADA2 are referred to as either amplicon sequence variants (ASVs) or ESVs in the literature (Callahan et al., 2016).  Putative chimeric sequences are then removed using the uchime3_denovo algorithm in VSEARCH.
 
@@ -77,7 +77,7 @@ An ESV x sample table that tracks read number for each ESV is generated with VSE
 
 For ITS, the ITSx extractor is used to remove flanking rRNA gene sequences so that subsequent analysis focuses on just the ITS1 or ITS2 spacer regions (Bengtsson-Palme et al., 2013).
 
-For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.12 (RDP classifier).  Instructions on how to install the RDP classifier is available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  We have provided a list of RDP-trained classifiers that can be used with MetaWorks (Table 1). 
+For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments using the Ribosomal Database classifier v2.13 (RDP classifier).  Instructions on how to install the RDP classifier is available below under [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).  We have provided a list of RDP-trained classifiers that can be used with MetaWorks (Table 1). 
 
 **Table 1.  Where to download trained RDP classifiers for a variety of popular marker gene/metabarcoding targets.**
 
@@ -91,12 +91,12 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | SSU (18S) | Eukaryotes | https://github.com/terrimporter/18SClassifier |
 | SSU (16S) | Prokaryotes | Built-in to the RDP classifier |
 | ITS | Fungi (Warcup) | Built-in to the RDP classifier |
-| ITS | Fungi (UNITE) | Built-in to the RDP classifier |
+| ITS | Fungi (UNITE) | https://github.com/terrimporter/UNITE_ITSClassifier |
 | LSU | Fungi | Built-in to the RDP classifier |
 
-If you are using the pipeline on a protein coding marker that does not yet have a HMM.profile, such as rbcL, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 .  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
+If you are using the pipeline on a protein coding marker that does not yet have a HMM.profile, such as rbcL, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 (Porter and Hajibabae, 2021).  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
 
-If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
+If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.2.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
 
 The final output file is results.csv and it has been formatted to specify ESVs from each sample, read counts, ESV/ORF sequences, and column headers.  Additional statistics and log files are also provided for each major bioinformatic step.
 
@@ -467,6 +467,8 @@ Koster, J., Rahmann, S. (2012) Snakemake - a scalable bioinformatics workflow en
 Martin, M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet. Journal, 17(1), pp–10.  
 
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
+
+Porter, T.M., & Hajibabaei, M. (2021).  Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets.  BioRxiv, doi: https://doi.org/10.1101/2021.01.24.427982 .
 
 Pruesse E, Quast C, Knittel K, Fuchs BM, Ludwig W, Peplies J, et al.(2007) SILVA: a comprehensive online resource for quality checked and aligned ribosomal RNA sequence data compatible with ARB. Nucleic Acids Research, 35:7188–96.	
 
