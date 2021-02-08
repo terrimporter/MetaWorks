@@ -1,6 +1,6 @@
 # MetaWorks
 
-MetaWorks consists of a conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
+MetaWorks consists of a conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
 This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
 
@@ -92,6 +92,7 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | SSU (16S) | Prokaryotes | Built-in to the RDP classifier |
 | ITS | Fungi (Warcup) | Built-in to the RDP classifier |
 | ITS | Fungi (UNITE) | https://github.com/terrimporter/UNITE_ITSClassifier |
+| ITS | Plants (PLANiTS) | https://github.com/terrimporter/PLANiTS_ITSClassifier |
 | LSU | Fungi | Built-in to the RDP classifier |
 
 If you are using the pipeline on a protein coding marker that does not yet have a HMM.profile, such as rbcL, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 (Porter and Hajibabae, 2021).  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
@@ -413,6 +414,8 @@ conda deactivate
 ## References
 
 Anaconda (2016).  Anaconda Software Distribution.  Available: https://anaconda.com 
+
+Banchi, E.; Ametrano, C.G.; Greco, S.; Stanković, D.; Muggia, L.; Pallavicini, A. PLANiTS: a curated sequence reference dataset for plant ITS DNA metabarcoding. Database 2020, 2020.
 
 Bengtsson-Palme J, Ryberg M, Hartmann M, Branco S, Wang Z, Godhe A, et al. (2013) Improved software detection and extraction of ITS1 and ITS2 from ribosomal ITS sequences of fungi and other eukaryotes for analysis of environmental sequencing data.  Methods in Ecology and Evolution, 4: 914–919. doi:10.1111/2041-210X.12073  
 
