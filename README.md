@@ -109,34 +109,34 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 conda env create -f environment.yml
 
 # Activate the environment
-conda activate MetaWorks_v1
+conda activate MetaWorks_v1.3.2
 
 # On the GPSC activate using source
-source ~/miniconda/bin/activate MetaWorks_v1
+source ~/miniconda/bin/activate MetaWorks_v1.3.2
 ```
 
-2. Download and install the RDP Classifier v2.12
+2. Download and install the RDP Classifier v2.13
 
-The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.12 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
+The pipeline also requires the RDP classifier for the taxonomic assignment step.  Although the RDP classifier v2.2 is available through conda, a newer v2.13 is available form SourceForge.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
 
 ```linux
 # decompress the file
-unzip rdp_classifier_2.12.zip
+unzip rdp_classifier_2.13.zip
 ```
 
 Make a note of where the application is saved so this can be added to the config.yaml file.
 
 ```linux
 RDP:
-    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
 ```
 
-The RDP classifier comes with the training sets to classify 16S, fungal ITS, and fungal LSU rDNA sequences.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
+The RDP classifier comes with the training sets to classify 16S, fungal ITS (LSU or ITS-Warcup), and fungal LSU rDNA sequences.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
 
 ```linux
 RDP:
-    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
-    t: "/path/to/CO1Classifier/v4/NCBI_BOLD_merged/mydata/mydata_trained/rRNAClassifier.properties"
+    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
+    t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
 ```
 
 3. If doing pseudogene filtering, then download and install the NCBI ORFfinder
@@ -206,10 +206,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate MetaWorks_v1
+source ~/miniconda3/bin/activate MetaWorks_v1.3.2
 
 # Activate conda method 2
-conda activate MetaWorks_v1
+conda activate MetaWorks_v1.3.2
 ```
 
 ### Checking program versions
@@ -221,7 +221,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v1
+conda activate MetaWorks_v13.2
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -307,7 +307,7 @@ nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 # to start a screen session
 screen
 ctrl+a+c
-conda activate MetaWorks_v1
+conda activate MetaWorks_v1.3.2
 snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ctrl+a+d
 
@@ -326,14 +326,14 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.1.0 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.3.2 by using wget from the command line:
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.1.0/v1.1.0.zip
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.2/v1.3.2.zip
 
 # unzip the pipeline
-unzip v1.1.0.zip
+unzip v1.3.2.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -360,7 +360,7 @@ Create then activate the MetaWorks_v1 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd v1.1.0
+cd v1.3.2
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
@@ -369,18 +369,18 @@ conda env create -f environment.yml
 conda activate MetaWorks_v1
 ```
 
-If you do not already have the RDP classifier installed on your system, download and install the RDP Classifier v2.12.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
+If you do not already have the RDP classifier installed on your system, download and install the RDP Classifier v2.13.  Go to https://sourceforge.net/projects/rdp-classifier/ and hit the 'Download' button to save the file to your computer.  On a mac, the file will be automatically downloaded to your Downloads/ folder.  Then, you can use wget or drag and drop to move the file to your home directory or wherever else you want it.  
 
 ```linux
 # decompress the file
-unzip rdp_classifier_2.12.zip
+unzip rdp_classifier_2.13.zip
 ```
 
 Make a note of where the application is saved so this can be added to the config_testing_COI_data.yaml file.
 
 ```linux
 RDP:
-    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
 ```
 
 You will also need to install the COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
@@ -421,7 +421,7 @@ The config_testing_COI_data.yaml file has been 'preset' to work with the COI_dat
 ```linux
 RDP:
 # enter the path to the RDP classifier 'classifier.jar' file here:
-    jar: "/path/to/rdp_classifier_2.12/dist/classifier.jar"
+    jar: "/path/to/rdp_classifier_2.13/dist/classifier.jar"
 
 # If you are using a custom-trained reference set 
 # enter the path to the trained RDP classifier rRNAClassifier.properties file here:
