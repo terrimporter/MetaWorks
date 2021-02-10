@@ -314,10 +314,10 @@ Begin by downloading the latest MetaWorks release available at https://github.co
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.2/v1.3.3.zip
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.3/MetaWorks1.3.3.tar.gz
 
 # unzip the pipeline
-unzip v1.3.3.zip
+unzip MetaWorks1.3.3.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -344,7 +344,7 @@ Create then activate the MetaWorks_v1.3.3 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd v1.3.3
+cd MetaWorks1.3.3
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
