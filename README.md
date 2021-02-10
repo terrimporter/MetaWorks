@@ -449,4 +449,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: February 7, 2021
+Last updated: February 9, 2021
