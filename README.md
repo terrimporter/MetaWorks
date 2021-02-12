@@ -31,7 +31,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1.3.3 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.3.4 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
 
@@ -110,10 +110,10 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 conda env create -f environment.yml
 
 # Activate the environment
-conda activate MetaWorks_v1.3.3
+conda activate MetaWorks_v1.3.4
 
 # On the GPSC activate using source
-source ~/miniconda/bin/activate MetaWorks_v1.3.3
+source ~/miniconda/bin/activate MetaWorks_v1.3.4
 ```
 
 2. The RDP classifier comes with the training sets to classify 16S, fungal LSU or ITS rDNA.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
@@ -190,10 +190,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate MetaWorks_v1.3.3
+source ~/miniconda3/bin/activate MetaWorks_v1.3.4
 
 # Activate conda method 2
-conda activate MetaWorks_v1.3.3
+conda activate MetaWorks_v1.3.4
 ```
 
 ### Checking program versions
@@ -205,7 +205,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v1.3.3
+conda activate MetaWorks_v1.3.4
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -291,7 +291,7 @@ nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 # to start a screen session
 screen
 ctrl+a+c
-conda activate MetaWorks_v1.3.3
+conda activate MetaWorks_v1.3.4
 snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ctrl+a+d
 
@@ -310,14 +310,14 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.3.2 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.3.4 by using wget from the command line:
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.3/MetaWorks1.3.3.tar.gz
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.4/MetaWorks1.3.4.tar.gz
 
 # unzip the pipeline
-unzip MetaWorks1.3.3.zip
+unzip MetaWorks1.3.4.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -340,17 +340,18 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 ```
 
-Create then activate the MetaWorks_v1.3.3 environment:
+Create then activate the MetaWorks_v1.3.4 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd MetaWorks1.3.3
+cd MetaWorks1.3.4
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
 
 # Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1.3.3
+conda activate MetaWorks_v1.3.4
+
 ```
 
 To taxonomically assign COI metabarocodes, you will  need to install the RDP-trained COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
@@ -449,4 +450,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: February 9, 2021
+Last updated: February 12, 2021
