@@ -18,7 +18,7 @@ snakemake --jobs 24 --snakefile snakefile_ESV --configfile config_ESV.yaml
 snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_ESV.yaml
 ```
 
-3. A third dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples *sequenced at different times* to which all sample-specific ESVs will be mapped. This script may be useful when it is ideal to denoise samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
+3. A third dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples *sequenced at different times* to which all ESVs will be mapped. This script may be useful when it is ideal to denoise samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
 
 ```linux
 # quickstart global ESV pipeline
