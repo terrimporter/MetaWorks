@@ -1,8 +1,31 @@
 # MetaWorks
 
-MetaWorks consists of a conda environment and Snakemake pipeline that is meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
+MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
-This data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .
+## Alternative dataflows:
+
+1. The default dataflow starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned ESVs.
+
+```linux
+# quickstart default ESV pipeline
+snakemake --jobs 24 --snakefile snakefile_ESV --configfile config_ESV.yaml
+```
+
+2. A secondary dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates OTUs based on 97% sequence similarity.
+
+```linux
+# quickstart OTU pipeline
+snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_ESV.yaml
+```
+
+3. A third dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples to which all sample-specific ESVs will be mapped. This script may be useful when it is ideal to denoise samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
+
+```linux
+# quickstart global ESV pipeline
+snakemake --jobs 24 --snakefile snakefile_ESV_global --configfile config_ESV_global.yaml
+```
+
+These data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .  Note that the OTU and global ESV pipelines above are new and have only been tested with the 16S and ITS markers.
 
 ## How to cite
 
@@ -450,4 +473,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: February 12, 2021
+Last updated: February 22, 2021
