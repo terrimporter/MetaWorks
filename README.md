@@ -137,10 +137,10 @@ Note 2: If you have samples sequenced at diffrent times (multiple seasons, years
 conda env create -f environment.yml
 
 # Activate the environment
-conda activate MetaWorks_v1.3.4
+conda activate MetaWorks_v1.4.0
 
 # On the GPSC activate using source
-source ~/miniconda/bin/activate MetaWorks_v1.3.4
+source ~/miniconda/bin/activate MetaWorks_v1.4.0
 ```
 
 2. The RDP classifier comes with the training sets to classify 16S, fungal LSU or ITS rDNA.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
@@ -217,10 +217,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate MetaWorks_v1.3.4
+source ~/miniconda3/bin/activate MetaWorks_v1.4.0
 
 # Activate conda method 2
-conda activate MetaWorks_v1.3.4
+conda activate MetaWorks_v1.4.0
 ```
 
 ### Checking program versions
@@ -232,7 +232,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v1.3.4
+conda activate MetaWorks_v1.4.0
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -318,7 +318,7 @@ nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 # to start a screen session
 screen
 ctrl+a+c
-conda activate MetaWorks_v1.3.4
+conda activate MetaWorks_v1.4.0
 snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ctrl+a+d
 
@@ -337,14 +337,14 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.3.4 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.4.0 by using wget from the command line:
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.3.4/MetaWorks1.3.4.tar.gz
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.4.0/MetaWorks1.4.0.tar.gz
 
 # unzip the pipeline
-unzip MetaWorks1.3.4.zip
+unzip MetaWorks1.4.0.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -367,17 +367,17 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 ```
 
-Create then activate the MetaWorks_v1.3.4 environment:
+Create then activate the MetaWorks_v1.4.0 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd MetaWorks1.3.4
+cd MetaWorks1.4.0
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
 
 # Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1.3.4
+conda activate MetaWorks_v1.4.0
 
 ```
 
