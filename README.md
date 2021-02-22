@@ -4,7 +4,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Alternative dataflows:
 
-1. The default dataflow starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).
+1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).
 
 ```linux
 # quickstart default ESV pipeline
@@ -54,7 +54,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1.3.4 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.4.0 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
 
@@ -123,6 +123,8 @@ If you are using the pipeline on a protein coding marker that does not yet have 
 If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.2.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
 
 The final output file is results.csv and it has been formatted to specify ESVs from each sample, read counts, ESV/ORF sequences, and column headers.  Additional statistics and log files are also provided for each major bioinformatic step.
+
+Note, if you choose to further cluster denoised ESVs into OTUs, then this is done using the cluster
 
 ## Prepare your environment to run the pipeline
 
