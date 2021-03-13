@@ -25,7 +25,7 @@ snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_ESV.yaml
 snakemake --jobs 24 --snakefile snakefile_ESV_global --configfile config_ESV_global.yaml
 ```
 
-These data flow will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .  Note that the OTU and global ESV pipelines above are new and have only been tested with the 16S and ITS markers.
+These dataflows will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .  Note that the OTU and global ESV pipelines above are new and have only been tested with the 16S and ITS markers.
 
 ## How to cite
 
