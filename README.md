@@ -29,11 +29,14 @@ These dataflows will be updated on a regular basis so check for the latest versi
 
 ## How to cite
 
-If you use this dataflow or any of the provided scripts, consider citing the MetaWorks preprint:  
+If you use this dataflow or any of the provided scripts, please cite the MetaWorks preprint:  
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
-If you use this dataflow for making COI taxonomic assignments, consider citing the COI classifier publication:  
+If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
+
+If you use the pseudogene filtering methods, please cite the pseudogene publication:
+Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BioRxiv, doi: https://doi.org/10.1101/2021.01.24.427982 .
 
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
