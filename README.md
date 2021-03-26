@@ -28,6 +28,7 @@ snakemake --jobs 24 --snakefile snakefile_ESV_global --configfile config_ESV_glo
 4. A fourth dataflow, starts with Illumina paired-end reads that do NOT to overlap.  If you would like to process the R1 and R2 files separately this pipeline can be used with caution.  Note that if your reads overlap, they should be processed using the default pipeline because longer sequences tend to make better taxonomic assignments with higher accuracy.
 
 ```linux
+# quickstart single read pipeline
 snakemake --jobs 24 --snakefile snakefile_ESV_singleRead --configfile config_ESV_singleRead.yaml
 ```
 
@@ -136,6 +137,8 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 *Note 1*: If you choose to further cluster denoised ESVs into OTUs, then this is done using the cluster_smallmem method in VSEARCH with id set to 0.97.  Primer trimmed reads are then mapped to OTUs to create an OTU table using the usearch_global method with id set to 0.97.  The remainder of the pipeline proceeds as described above.  The final output file is results_OTU.csv.
 
 *Note 2*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of ESV ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. Trial1_16S, Trial2_16S, Trial3_16S.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method.  This file then becomes the new global ESV sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global ESV sequence database using the usearch_global methods with the id set to 1.0.  The global ESV that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
+
+*Note 3*: If you are using the single read pipeline, the read pairing step with SeqPrep is skipped.  If processing the R1 read, raw read statistics are calculated, then the primer is trimmed using CUTADAPT as described above.  If processing the R2 read, raw read statistics are calculated then the read is reverse-complemented before the primer is trimmed using CUTADAPT as described above.  The final file is results.csv.  When assessing the quality of your taxonomic assignments, be sure to use the appropriate bootstrap support cutoffs for these shorter than usual sequences.
 
 ## Prepare your environment to run the pipeline
 
