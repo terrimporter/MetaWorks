@@ -49,7 +49,7 @@ If you use this dataflow or any of the provided scripts, please cite the MetaWor
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
 You can also site this repository:
-MetaWorks: MetaWorks v1.6.1, DOI: 10.5281/zenodo.4741407
+MetaWorks: DOI: 10.5281/zenodo.4741407
 
 If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
