@@ -147,6 +147,8 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 
 *Note 3*: If you are using the single read pipeline, the read pairing step with SeqPrep is skipped.  If processing the R1 read, raw read statistics are calculated, then the primer is trimmed using CUTADAPT as described above.  If processing the R2 read, raw read statistics are calculated then the read is reverse-complemented before the primer is trimmed using CUTADAPT as described above.  The final file is results.csv.  When assessing the quality of your taxonomic assignments, be sure to use the appropriate bootstrap support cutoffs for these shorter than usual sequences.
 
+*Note 4*: If you are sorting out tagged individuals, it is advised to set the CUTADAPT -O parameter to maximize the tag+primer overlap with the read.  For example, if the range of tag+primer lengths is 25 - 27bp, then set -O 25 (default is 3 bp).  If the tags are short, then it is especially important to ensure no mismatches between this and the read.  For this reason, it is recommended to set the CUTADAPT -e parameter to allow for zero errors between the tag+primer and read, -e 0 (default is 0.1 or 10% errors).
+
 ## Prepare your environment to run the pipeline
 
 1. This pipeline includes a conda environment that provides most of the programs needed to run this pipeline (SNAKEMAKE, SEQPREP, CUTADAPT, VSEARCH, etc.).
