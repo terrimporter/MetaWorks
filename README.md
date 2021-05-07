@@ -2,8 +2,6 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4741407.svg)](https://doi.org/10.5281/zenodo.4741407)
 
-https://zenodo.org/record/4741407
-
 MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
 ## Alternative dataflows:
