@@ -283,22 +283,21 @@ If you have an older version of GLIBC, then you may be missing libraries that OR
 Create a symbolic link to the library:
 
 ```linux
-cd ~/miniconda3/envs/MetaWorks_v1/glibc-2.14
+cd ~/miniconda3/envs/MetaWorks_v1.6.0/lib
 ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
 ```
 
-The glibc 2.14 library is already available in the MetaWorks_v1 environment.  The LD_LIBRARY_PATH environment variable will need to be activated (and deactivated) by adding the following scripts as follows:
-
-Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1/etc/conda/activate.d/LD_PATH.sh
+Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1.6.0/etc/conda/activate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
 ```linux
 export LD_LIBRARY_PATH_CONDA_BACKUP=$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$CONDA_PREFIX/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
-Create the file LD_PATH.sh in the following location to unset the environment variable: ~/miniconda3/envs/MetaWorks_v1/etc/conda/deactivate.d/LD_PATH.sh
+Create the file LD_PATH.sh in the following location to unset the environment variable:  
+~/miniconda3/envs/MetaWorks_v1.6.0/etc/conda/deactivate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -306,9 +305,13 @@ Put the following text in the LD_PATH.sh file:
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CONDA_BACKUP
 ```
 
-
-
 Deactivate then reactivate the environment.
+
+Test orffinder:
+
+```linux
+ORFfinder
+```
 
 ### Use the bold.hmm with the pseudogene removal pipeline
 
