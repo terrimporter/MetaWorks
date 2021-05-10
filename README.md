@@ -200,7 +200,7 @@ Run the program to test that it works:
 ORFfinder
 ```
 
-If you get an error that requries a GLIBC_2.14 libc.so.6 library, then follow the instructions at [Use conda's libc library for NCBI's ORFfinder](#use-condas-libc-library-for-ncbis-orffinder).
+If you get an error that requries a GLIBC_2.14 libc.so.6 library, then follow the instructions at [Add libraries for ORFfinder](#add-libraries-for-orffinder).
 
 4. In most cases, your raw paired-end Illumina reads can go into a directory called 'data' which should be placed in the same directory as the other files that come with this pipeline.
 
@@ -276,7 +276,16 @@ vsearch --version
 
 Version numbers are also tracked in the snakefile.
 
-### Use conda's libc library for NCBI's ORFfinder
+### Add libraries for ORFfinder
+
+If you have an older version of GLIBC, then you may be missing libraries that ORffinder needs.  Some of these have already been provided, but you need to create some links yourself.
+
+Create a symbolic link to the library:
+
+```linux
+cd ~/miniconda3/envs/MetaWorks_v1/glibc-2.14
+ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
+```
 
 The glibc 2.14 library is already available in the MetaWorks_v1 environment.  The LD_LIBRARY_PATH environment variable will need to be activated (and deactivated) by adding the following scripts as follows:
 
@@ -297,12 +306,7 @@ Put the following text in the LD_PATH.sh file:
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CONDA_BACKUP
 ```
 
-Create a symbolic link to the library:
 
-```linux
-cd ~/miniconda3/envs/MetaWorks_v1/lib64
-ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
-```
 
 Deactivate then reactivate the environment.
 
