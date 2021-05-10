@@ -188,9 +188,9 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
 gunzip ORFfinder.gz
 
 # make executable
-chmod 755 ORFfinder
+chmod a+x ORFfinder
 
-# put in your conda PATH
+# put in your conda environment bin
 mv ORFfinder ~/miniconda3/envs/MetaWorks_v1.6.1/bin/.
 ```
 
@@ -307,7 +307,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CONDA_BACKUP
 
 Deactivate then reactivate the environment.
 
-Test orffinder:
+Test ORFfinder:
 
 ```linux
 ORFfinder
