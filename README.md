@@ -6,7 +6,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Alternative dataflows:
 
-1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).
+1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .
 
 ```linux
 # quickstart default ESV pipeline
@@ -510,4 +510,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: May 10, 2021
+Last updated: May 19, 2021
