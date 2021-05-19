@@ -6,7 +6,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Alternative dataflows:
 
-1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).
+1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomicaly assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .
 
 ```linux
 # quickstart default ESV pipeline
@@ -108,9 +108,9 @@ Results can be filtered by bootstrap support values to reduce false-positive ass
 
 ## Pipeline details
 
-Raw paired-end reads are merged using SEQPREP v1.3.2 from bioconda (St. John, 2016).  This step looks for a minimum Phred quality score of 13 in the overlap region, requires at least a 25bp overlap.  Using Phred quality cutoff of 13 at this step is actually more stringent than using a Phred quality score cutoff of 20 at this step as more bases will exceed the cutoff when aligning the paired reads and more mismatches (if present) are counted.
+Raw paired-end reads are merged using SEQPREP v1.3.2 from bioconda (St. John, 2016).  This step looks for a minimum Phred quality score of 13 in the overlap region, requires at least a 25bp overlap.  These paramters are adjustable.  Using Phred quality cutoff of 13 at this step is actually more stringent than using a Phred quality score cutoff of 20 at this step as more bases will exceed the cutoff when aligning the paired reads and more mismatches (if present) are counted.
 
-Primers are trimmed in two steps using CUTADAPT v3.2 from bioconda (Martin, 2011).  This step looks for a minimum Phred quality score of at least 20 at the ends, the forward primer is trimmed first based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.  The output from the first step, is used as input for the second step.  This step looks for a minimum Phred quality score of at least 20 at the ends, the reverse primer is trimmed based on its sequence, no more than 3 N's allowed, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.
+Primers are trimmed in two steps using CUTADAPT v3.2 from bioconda (Martin, 2011).  This step now uses the linked adapter approach to remove forward and reverse primers in one step.  Primer sequences need to be specified in an adapters.fasta file and the user may wish to anchor them or not, see CUTADAPT manual for details https://cutadapt.readthedocs.io/en/stable/guide.html?highlight=linked#linked-adapters .  At this step, CUTADAPT looks for a minimum Phred quality score of at least 20 at the ends, no more than 10% errors allowed in the primer, no more than 3 N's allowed in the rest of the sequence, trimmed reads need to be at least 150 bp, untrimmed reads are discarded.  Each of these parameters are adjustable. 
 
 Files are reformatted and samples are combined for a global analysis.
 
@@ -510,4 +510,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: May 10, 2021
+Last updated: May 19, 2021
