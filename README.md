@@ -62,7 +62,7 @@ If you use this dataflow for making COI taxonomic assignments, please cite the C
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
 
 If you use the pseudogene filtering methods, please cite the pseudogene publication:
-Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BioRxiv, doi: https://doi.org/10.1101/2021.01.24.427982 .
+Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BMC Bioinformatics, 22: 256. 
 
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
@@ -508,7 +508,7 @@ Martin, M. (2011). Cutadapt removes adapter sequences from high-throughput seque
 
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
 
-Porter, T.M., & Hajibabaei, M. (2021).  Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets.  BioRxiv, doi: https://doi.org/10.1101/2021.01.24.427982 .
+Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BMC Bioinformatics, 22: 256. 
 
 Pruesse E, Quast C, Knittel K, Fuchs BM, Ludwig W, Peplies J, et al.(2007) SILVA: a comprehensive online resource for quality checked and aligned ribosomal RNA sequence data compatible with ARB. Nucleic Acids Research, 35:7188–96.	
 
