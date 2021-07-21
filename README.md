@@ -13,28 +13,35 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 snakemake --jobs 24 --snakefile snakefile_ESV --configfile config_ESV.yaml
 ```
 
-2. A second dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates operational taxonomic units (OTUs) based on 97% sequence similarity.
+2. This dataflow starts with the taxonomically assigned ESVs from the default dataflow and generates operational taxonomic units (OTUs) based on 97% sequence similarity.
 
 ```linux
 # quickstart OTU pipeline
 snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_ESV.yaml
 ```
 
-3. A third dataflow, starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples *sequenced at different times* to which all ESVs will be mapped. This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
+3. This dataflow starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples *sequenced at different times* to which all ESVs will be mapped. This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
 
 ```linux
 # quickstart global ESV pipeline
 snakemake --jobs 24 --snakefile snakefile_ESV_global --configfile config_ESV_global.yaml
 ```
 
-4. A fourth dataflow, starts with Illumina paired-end reads that do NOT to overlap.  If you would like to process the R1 and R2 files separately this pipeline can be used with caution.  Note that if your reads overlap, they should be processed using the default pipeline because longer sequences tend to make better taxonomic assignments with higher accuracy.
+4. This dataflow starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of OTU IDs consistent across all samples *sequenced at different times* to which all denoised ESVs willb e mapped.  This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent OTU IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
+
+```linux
+# quickstart global OTU pipeline
+snakemake --jbos 24 --snakefile snakefile_OTU_global --configfile config_OTU_global.yaml
+```
+
+5. This dataflow starts with Illumina paired-end reads that do NOT to overlap.  If you would like to process the R1 and R2 files separately this pipeline can be used with caution.  Note that if your reads overlap, they should be processed using the default pipeline because longer sequences tend to make better taxonomic assignments with higher accuracy.
 
 ```linux
 # quickstart single read pipeline
 snakemake --jobs 24 --snakefile snakefile_ESV_singleRead --configfile config_ESV_singleRead.yaml
 ```
 
-5. A fifth dataflow, can handle dual-indexed amplicons sequenced from individuals (as opposed to bulk samples) that were pooled prior to Illumina indexing.  An extra mapping file is needed to sort out individuals and amplicon(s) and should contain the following fields: SampleID, Amplicon, Forward, Reverse.  This should be saved as a comma-separated values (csv) file.  An example of a DualIndexedSamples.csv is available in the 'testing' directory.  The Forward column should contain the 5'-TagForwardPrimer sequence.  The Reverse column should contain the 5'-TagReversePrimer sequence. In our experiments, tags ranged from 5 - 6 bp.  The total TagPrimer length ranged from 25-27bp.  For maximum specificity, the cutadapt -O parameter in the configuration file should be set to the minimum TagPrimer length range, ex. 25bp in our example.
+6. This dataflow can handle dual-indexed amplicons sequenced from individuals (as opposed to bulk samples) that were pooled prior to Illumina indexing.  An extra mapping file is needed to sort out individuals and amplicon(s) and should contain the following fields: SampleID, Amplicon, Forward, Reverse.  This should be saved as a comma-separated values (csv) file.  An example of a DualIndexedSamples.csv is available in the 'testing' directory.  The Forward column should contain the 5'-TagForwardPrimer sequence.  The Reverse column should contain the 5'-TagReversePrimer sequence. In our experiments, tags ranged from 5 - 6 bp.  The total TagPrimer length ranged from 25-27bp.  For maximum specificity, the cutadapt -O parameter in the configuration file should be set to the minimum TagPrimer length range, ex. 25bp in our example.
 
 ```linux
 # quickstart dual indexed sample pipeline
@@ -49,7 +56,7 @@ If you use this dataflow or any of the provided scripts, please cite the MetaWor
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
 You can also site this repository:
-Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.7.1). Zenodo. http://doi.org/10.5281/zenodo.4741407 
+Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.8.1). Zenodo. http://doi.org/10.5281/zenodo.4741407 
 
 If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
@@ -76,7 +83,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1.7.1 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.8.1 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
 
@@ -148,11 +155,14 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 
 *Note 1*: If you choose to further cluster denoised ESVs into OTUs, then this is done using the cluster_smallmem method in VSEARCH with id set to 0.97.  Primer trimmed reads are then mapped to OTUs to create an OTU table using the usearch_global method with id set to 0.97.  The remainder of the pipeline proceeds as described above.  The final output file is results_OTU.csv.
 
-*Note 2*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of ESV ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. Trial1_16S, Trial2_16S, Trial3_16S.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method.  This file then becomes the new global ESV sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global ESV sequence database using the usearch_global methods with the id set to 1.0.  The global ESV that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
+*Note 2*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of ESV ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. 16S_trial1, 16S_trial2, 16S_trial3.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method.  This file then becomes the new global ESV sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global ESV sequence database using the usearch_global methods with the id set to 1.0.  The global ESV that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
 
-*Note 3*: If you are using the single read pipeline, the read pairing step with SeqPrep is skipped.  If processing the R1 read, raw read statistics are calculated, then the primer is trimmed using CUTADAPT as described above.  If processing the R2 read, raw read statistics are calculated then the read is reverse-complemented before the primer is trimmed using CUTADAPT as described above.  The final file is results.csv.  When assessing the quality of your taxonomic assignments, be sure to use the appropriate bootstrap support cutoffs for these shorter than usual sequences.
+*Note 3*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of OTU ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. 16S_trial1, 16S_trial2, 16S_trial3.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method, then clustered into OTUs with 97% sequence similarity.  This file then becomes the new global OTU sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global OTU sequence database using the usearch_global methods with the id set to 0.97 .  The global OTU that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
 
-*Note 4*: If you are sorting out tagged individuals, it is advised to set the CUTADAPT -O parameter to maximize the tag+primer overlap with the read.  For example, if the range of tag+primer lengths is 25 - 27bp, then set -O 25 (default is 3 bp).  If the tags are short, then it is especially important to ensure no mismatches between this and the read.  For this reason, it is recommended to set the CUTADAPT -e parameter to allow for zero errors between the tag+primer and read, -e 0 (default is 0.1 or 10% errors).
+
+*Note 4*: If you are using the single read pipeline, the read pairing step with SeqPrep is skipped.  If processing the R1 read, raw read statistics are calculated, then the primer is trimmed using CUTADAPT as described above.  If processing the R2 read, raw read statistics are calculated then the read is reverse-complemented before the primer is trimmed using CUTADAPT as described above.  The final file is results.csv.  When assessing the quality of your taxonomic assignments, be sure to use the appropriate bootstrap support cutoffs for these shorter than usual sequences.
+
+*Note 5*: If you are sorting out tagged individuals, it is advised to set the CUTADAPT -O parameter to maximize the tag+primer overlap with the read.  For example, if the range of tag+primer lengths is 25 - 27bp, then set -O 25 (default is 3 bp).  If the tags are short, then it is especially important to ensure no mismatches between this and the read.  For this reason, it is recommended to set the CUTADAPT -e parameter to allow for zero errors between the tag+primer and read, -e 0 (default is 0.1 or 10% errors).
 
 ## Prepare your environment to run the pipeline
 
@@ -163,10 +173,10 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 conda env create -f environment.yml
 
 # Activate the environment
-conda activate MetaWorks_v1.7.1
+conda activate MetaWorks_v1.8.1
 
 # On the GPSC activate using source
-source ~/miniconda/bin/activate MetaWorks_v1.7.1
+source ~/miniconda/bin/activate MetaWorks_v1.8.1
 ```
 
 2. The RDP classifier comes with the training sets to classify 16S, fungal LSU or ITS rDNA.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
@@ -191,7 +201,7 @@ gunzip ORFfinder.gz
 chmod a+x ORFfinder
 
 # put in your conda environment bin
-mv ORFfinder ~/miniconda3/envs/MetaWorks_v1.7.1/bin/.
+mv ORFfinder ~/miniconda3/envs/MetaWorks_v1.8.1/bin/.
 ```
 
 Run the program to test that it works:
@@ -243,10 +253,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate MetaWorks_v1.7.1
+source ~/miniconda3/bin/activate MetaWorks_v1.8.1
 
 # Activate conda method 2
-conda activate MetaWorks_v1.7.1
+conda activate MetaWorks_v1.8.1
 ```
 
 ### Checking program versions
@@ -258,7 +268,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v1.7.1
+conda activate MetaWorks_v1.8.1
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -283,11 +293,11 @@ If you have an older version of GLIBC, then you may be missing libraries that OR
 Create a symbolic link to the library:
 
 ```linux
-cd ~/miniconda3/envs/MetaWorks_v1.7.1/lib
+cd ~/miniconda3/envs/MetaWorks_v1.8.1/lib
 ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
 ```
 
-Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1.7.1/etc/conda/activate.d/LD_PATH.sh
+Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1.8.1/etc/conda/activate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -297,7 +307,7 @@ export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
 Create the file LD_PATH.sh in the following location to unset the environment variable:  
-~/miniconda3/envs/MetaWorks_v1.7.1/etc/conda/deactivate.d/LD_PATH.sh
+~/miniconda3/envs/MetaWorks_v1.8.1/etc/conda/deactivate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -351,7 +361,7 @@ nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 # to start a screen session
 screen
 ctrl+a+c
-conda activate MetaWorks_v1.7.1
+conda activate MetaWorks_v1.8.1
 snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ctrl+a+d
 
@@ -370,14 +380,14 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.7.1 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.8.1 by using wget from the command line:
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.7.1/MetaWorks1.7.1.tar.gz
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.8.1/MetaWorks1.8.1.tar.gz
 
 # unzip the pipeline
-unzip MetaWorks1.7.1.zip
+unzip MetaWorks1.8.1.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -400,17 +410,17 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 ```
 
-Create then activate the MetaWorks_v1.7.1 environment:
+Create then activate the MetaWorks_v1.8.1 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd MetaWorks1.7.1
+cd MetaWorks1.8.1
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
 
 # Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1.7.1
+conda activate MetaWorks_v1.8.1
 
 ```
 
@@ -488,7 +498,7 @@ Gergely, S. (2018, January). Perl-rename. Retrieved from https://github.com/subo
 
 Gibson, J., Shokralla, S., Porter, T. M., King, I., Konynenburg, S. van, Janzen, D. H., … Hajibabaei, M. (2014). Simultaneous assessment of the macrobiome and microbiome in a bulk sample of tropical arthropods through DNA metasystematics. Proceedings of the National Academy of Sciences, 111(22), 8007–8012. doi: 10.1073/pnas.1406468111
 
-Hajibabaei, M., Spall, J. L., Shokralla, S., & van Konynenburg, S. (2012). Assessing biodiversity of a freshwater benthic macroinvertebrate community through non-destructive environmental barcoding of DNA from preservative ethanol. BMC Ecology, 12, 28. doi: 10.11.7.1472-6785-12-28
+Hajibabaei, M., Spall, J. L., Shokralla, S., & van Konynenburg, S. (2012). Assessing biodiversity of a freshwater benthic macroinvertebrate community through non-destructive environmental barcoding of DNA from preservative ethanol. BMC Ecology, 12, 28. doi: 10.11.8.0472-6785-12-28
 
 Iwasaki W, Fukunaga T, Isagozawa R, Yamada K, Maeda Y, Satoh TP, et al.( 2013) MitoFish and MitoAnnotator: A Mitochondrial Genome Database of Fish with an Accurate and Automatic Annotation Pipeline. Molecular Biology and Evolution, 30:2531–40. 
 
@@ -510,4 +520,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: May 20, 2021
+Last updated: July 21, 2021
