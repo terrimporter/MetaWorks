@@ -6,7 +6,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Available dataflows:
 
-1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Multiple primers sets for the same marker gene can be processed at one time, E.g. COI_BR5, COI_F230R, COI_mljg.  Different marker genes, however, need to be processed separately, E.g. COI, ITS, rbcL.
+1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  Different marker genes, however, need to be processed separately, E.g. COI, ITS, rbcL.
 
 ```linux
 # quickstart default ESV pipeline
