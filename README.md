@@ -4,6 +4,29 @@
 
 MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
+## Quick Start example using COI test data
+
+This MetaWorks quick start assumes that you have already installed the CO1 Classifier available from https://github.com/terrimporter/CO1Classifier .  If you have not already done so, load the CO1 Classifier by following the quickstart instructions on the CO1Classifier GitHub page.
+
+```linux
+# download latest version of MetaWorks
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.8.1/MetaWorks1.8.1.zip
+unzip MetaWorks1.8.1.zip
+cd MetaWorks1.8.1
+
+# edit config_testing_COI_data.yaml file to customize path to CO1v4 classifier properties file (line 131)
+
+# create the latest conda environment and activate it
+conda env create -f environment.yml
+conda activate MetaWorks_v1.8.1
+
+# run the pipeline on the COI test data
+snakemake --jobs 1 --configfile config_testing_COI_data.yaml --snakefile snakefile_ESV
+
+```
+
+Once you have the results.csv file, results can be imported into R for further anlaysis.  If you need an ESV table for downstream analysis this can be generated in R as well [How to create an ESV table](#how-to-create-an-esv-table).
+
 ## Available dataflows:
 
 1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  Different marker genes, however, need to be processed separately, E.g. COI, ITS, rbcL.
@@ -374,6 +397,15 @@ screen -r session_id
 
 3. You can submit your job to the queuing system if you use one.
 
+### How to make an ESV table
+
+The results.csv file is the final file in the MetaWorks pipeline.  An ESV table (also known as an OTU table or pivot table) can be created in Excel or R.  In R, changing the results.csv file from a wider to a longer tabular format can be done using different libraries.
+
+```linux
+# R using reshape2 library
+ESVtable <- reshape2::dcast(df, SampleName ~ GlobalESV, value.var = "ESVsize", fun.aggregate = sum)
+```
+
 ## Tutorial
 
 We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
@@ -520,4 +552,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: July 21, 2021
+Last updated: August 4, 2021
