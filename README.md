@@ -397,7 +397,7 @@ screen -r session_id
 
 3. You can submit your job to the queuing system if you use one.
 
-### How to make an ESV table
+### How to create an ESV table
 
 The results.csv file is the final file in the MetaWorks pipeline.  An ESV table (also known as an OTU table or pivot table) can be created in Excel or R.  In R, changing the results.csv file from a wider to a longer tabular format can be done using different libraries.
 
