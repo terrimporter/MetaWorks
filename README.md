@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4741407.svg)](https://doi.org/10.5281/zenodo.4741407)  
 
-MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
+MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish, vertebrates), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
 ## Quick Start example using COI test data
 
@@ -22,7 +22,6 @@ conda activate MetaWorks_v1.8.1
 
 # run the pipeline on the COI test data
 snakemake --jobs 1 --configfile config_testing_COI_data.yaml --snakefile snakefile_ESV
-
 ```
 
 Once you have the results.csv file, results can be imported into R for further anlaysis.  If you need an ESV table for downstream analysis this can be generated in R as well [How to create an ESV table](#how-to-create-an-esv-table).
@@ -162,6 +161,7 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | rbcL | Diatoms | https://github.com/terrimporter/rbcLdiatomClassifier |
 | rbcL | Eukarytoes | https://github.com/terrimporter/rbcLClassifier |
 | 12S | Fish | https://github.com/terrimporter/12SfishClassifier |
+| 12S | Vertebrates | https://github.com/terrimporter/12SvertebrateClassifier |
 | SSU (18S) | Diatoms | https://github.com/terrimporter/SSUdiatomClassifier |
 | SSU (18S) | Eukaryotes | https://github.com/terrimporter/18SClassifier |
 | SSU (16S) | Prokaryotes | Built-in to the RDP classifier |
@@ -172,7 +172,7 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 
 If you are using the pipeline on a protein coding marker that does not yet have a HMM.profile, such as rbcL, then ESVs are translated into every possible open reading frame (ORF) on the plus strand using ORFfinder v0.4.3 (Porter and Hajibabae, 2021).  The longest ORF (nt) is reatined for each ESV.  Putative pseudogenes are removed as outliers with unusually small/large ORF lengths.  Outliers are calcualted as follows:  Sequence lengths shorter than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes (ore sequences with errors that cause a frame-shift).  Sequence lengths longer than the 75th percentile + 1.5\*IQR are also removed as putative pseudogenes.
 
-If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.2.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
+If you use the pipeline on a protein coding marker that has a HMM.profile, such as COI arthropoda, then the ESVs are translated into nucleotide and amino acid ORFs using ORFfinder, the longest orfs are retained and consolidated.  Amino acid sequences for the longest ORFs are used for profile hidden Markov model sequence analysis using HMMER v3.3.2.  Sequence bit score outliers are identified as follows: ORFs with scores lower than the 25th percentile - 1.5\*IQR (inter quartile range) are removed as putative pseudogenes.  This method should remove sequences that don't match well to a profile HMM based on arthropod COI barcode sequences mined from public data at BOLD.
 
 The final output file is results.csv and it has been formatted to specify ESVs from each sample, read counts, ESV/ORF sequences, and column headers.  Additional statistics and log files are also provided for each major bioinformatic step.
 
@@ -181,7 +181,6 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 *Note 2*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of ESV ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. 16S_trial1, 16S_trial2, 16S_trial3.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method.  This file then becomes the new global ESV sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global ESV sequence database using the usearch_global methods with the id set to 1.0.  The global ESV that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
 
 *Note 3*: If you have samples sequenced at diffrent times (multiple seasons, years, or trials), you will likely process these samples right after sequencing resulting in multiple sets of ESVs.  To facilitate downstream processing, it may be advantagous to have a GLOBAL set of OTU ids so that data can be compared at the ESV level accross seasons, years, or trials.  The directories containing the output files processed using the default pipeline need to be in the same directory as the snakefile script. Ex. 16S_trial1, 16S_trial2, 16S_trial3.  In each of these directoreis, there is a cat.denoised.nonchimeras file and a results.csv file.  The denoised (chimera-free) ESVs (or ITSx processed ESVs) are concatenated into a single file, dereplicated, relabelled using the SHA1 method, then clustered into OTUs with 97% sequence similarity.  This file then becomes the new global OTU sequence database.  A fasta file is generated from the results.csv file and these sequences are clustered with the new global OTU sequence database using the usearch_global methods with the id set to 0.97 .  The global OTU that each trial ESV clusters with is parsed and mapped to the final output file called global_results.csv.
-
 
 *Note 4*: If you are using the single read pipeline, the read pairing step with SeqPrep is skipped.  If processing the R1 read, raw read statistics are calculated, then the primer is trimmed using CUTADAPT as described above.  If processing the R2 read, raw read statistics are calculated then the read is reverse-complemented before the primer is trimmed using CUTADAPT as described above.  The final file is results.csv.  When assessing the quality of your taxonomic assignments, be sure to use the appropriate bootstrap support cutoffs for these shorter than usual sequences.
 
@@ -211,7 +210,7 @@ RDP:
 
 3. If doing pseudogene filtering, then download and install the NCBI ORFfinder
 
-The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your conda environment path.
+The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your conda environment path (ex. ~/miniconda/envs/MetaWorks_v1.8.1/bin).
 
 ```linux
 # download
