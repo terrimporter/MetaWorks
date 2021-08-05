@@ -410,7 +410,7 @@ ESVtable <- reshape2::dcast(df, SampleName ~ GlobalESV, value.var = "ESVsize", f
 If you are targeting a broad group, such as Metazoa using COI primers, you can still filter out pseudogenes using removal method 1 that uses ORFfinder.  This can be done in two steps, for example by first processing invertebrate phyla, then processing phylum chordata that includes the vertebrata clade (see NCBI taxonomy).  Note that pseudogene removal method 2 that uses HMMer is currently only available for COI arthropoda at this time.
 
 1. Edit the config_ESV.yaml file as follows:  
-Line 156, set the taxonomy filter to '-e Arthropoda -e Annelida -e Mollusca -e Cnidaria -e Platyhelminthes' to target invertebrate animal phyla  
+Line 156, set the taxonomy filter to '-e Annelida -e Arthropoda -e Cnidaria -e Echinodermata -e Mollusca -e Nematoda -e Platyhelminthes -e Porifera' to target invertebrate animal phyla  
 Line 163, set to removal method 1 (uses ORFfinder)  
 Line 177, set to '5' to use the invertebrate mitochondrial genetic code for translation  
 Run snakemake.  Move invertebrate outfiles into their own directory so they do not get over-written: taxon.zotus, chimera.denoised.nonchimeras.taxon, orf.fasta*, rdp.csv.tmp, results.csv .  
