@@ -28,7 +28,7 @@ Once you have the results.csv file, results can be imported into R for further a
 
 ## Available dataflows:
 
-1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Note that the reverse primer should be reverse-complemented in the adapters.fasta file.  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  Different marker genes, however, need to be processed separately, E.g. COI, ITS, rbcL.
+1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Note that the reverse primer should be reverse-complemented in the adapters.fasta file.  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  If any of these amplicons are nested within each other, then the primers should be 'anchored' in the adapters.fasta file, see /testing/adapters_anchored.fasta .  Different marker genes should be processed separately, E.g. COI, ITS, rbcL.
 
 ```linux
 # quickstart default ESV pipeline
