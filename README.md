@@ -405,6 +405,24 @@ The results.csv file is the final file in the MetaWorks pipeline.  An ESV table 
 ESVtable <- reshape2::dcast(df, SampleName ~ GlobalESV, value.var = "ESVsize", fun.aggregate = sum)
 ```
 
+### How to filter pseudogenes for taxa with different genetic codes
+
+If you are targeting a broad group, such as Metazoa using COI primers, you can still filter out pseudogenes using removal method 1 that uses ORFfinder.  This can be done in two steps, for example by first processing invertebrate phyla, then processing phylum chordata that includes the vertebrata clade (see NCBI taxonomy).  Note that pseudogene removal method 2 that uses HMMer is currently only available for COI arthropoda at this time.
+
+1. Edit the config_ESV.yaml file as follows:
+Line 156, set the taxonomy filter to '-e Arthropoda -e Annelida -e Mollusca -e Cnidaria -e Platyhelminthes' to target invertebrate animal phyla.
+Line 163, set to removal method 1 (uses ORFfinder)
+Line 177, set to '5' to use the invertebrate mitochondrial genetic code for translation
+Run snakemake.  Move invertebrate outfiles into their own directory so they do not get over-written: taxon.zotus, chimera.denoised.nonchimeras.taxon, orf.fasta*, rdp.csv.tmp, results.csv .
+
+2. Edit the config_ESV.yaml file as follows:
+Line 156, set the taxonomy filter to '-e Chordata' to target animals with a notochord (includes the Vertebrata clade) (see NCBI taxonomy).
+Lin 163, keep removal method 1
+Line 177, set to '2' to use the vertebrate mitochondrial genetic code for translation
+Run snakemake.  Move chordata outfiles into their own directory so they do not get over-written: taxon.zotus, chimera.denoised.nonchimeras.taxon, orf.fasta*, rdp.csv.tmp, results.csv .
+
+The invertebrate and chordata results.csv files can then be combined prior to downstream processing.
+
 ## Tutorial
 
 We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
