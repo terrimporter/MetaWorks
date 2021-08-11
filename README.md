@@ -6,7 +6,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Quick Start example using COI test data
 
-This MetaWorks quick start assumes that you have already installed the CO1 Classifier available from https://github.com/terrimporter/CO1Classifier .  If you have not already done so, load the CO1 Classifier by following the quickstart instructions on the CO1Classifier GitHub page.  It also assumes that you alrady have conda installed, otherwise see [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
+This MetaWorks quick start assumes that you have already installed the CO1 Classifier available from https://github.com/terrimporter/CO1Classifier .  If you have not already done so, load the CO1 Classifier by following the quickstart instructions on the CO1 Classifier GitHub page.  It also assumes that you alrady have conda installed, otherwise see [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
 
 ```linux
 # download latest version of MetaWorks
