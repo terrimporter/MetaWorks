@@ -14,7 +14,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline)    
 
-[Quick start exmaple using COI test data](#quick-start-example-using-COI-test-data)  
+[Quick start example using COI test data](#quick-start-example-using-COI-test-data)  
 
 [Tutorial](#tutorial)
 
@@ -241,7 +241,7 @@ Once you have the results.csv file, results can be imported into R for further a
 
 ## Tutorial
 
-We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
+We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).  Same as the quickstart above, but with additional instructions here if needed.
 
 **Step 1.  Prepare your environment for the pipeline.**
 
