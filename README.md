@@ -213,7 +213,10 @@ RDP:
 The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your conda environment path (ex. ~/miniconda/envs/MetaWorks_v1.9.0/bin).
 
 ```linux
-# download
+# go to your conda environment bin
+cd ~/miniconda3/envs/MetaWorks_v1.9.0/bin/.
+
+# download ORFfinder
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
 
 # decompress
@@ -221,9 +224,6 @@ gunzip ORFfinder.gz
 
 # make executable
 chmod a+x ORFfinder
-
-# put in your conda environment bin
-mv ORFfinder ~/miniconda3/envs/MetaWorks_v1.9.0/bin/.
 ```
 
 Run the program to test that it works:
@@ -569,4 +569,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: August 5, 2021
+Last updated: August 10, 2021
