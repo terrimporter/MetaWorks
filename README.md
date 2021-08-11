@@ -4,29 +4,56 @@
 
 MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish, vertebrates), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
-## Quick Start example using COI test data
+## Outline
 
-This MetaWorks quick start assumes that you have already installed the CO1 Classifier available from https://github.com/terrimporter/CO1Classifier .  If you have not already done so, load the CO1 Classifier by following the quickstart instructions on the CO1 Classifier GitHub page.  It also assumes that you already have conda installed, otherwise see [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
+[Overview](#overview)  
 
-```linux
-# download latest version of MetaWorks
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.0/MetaWorks1.9.0.zip
-unzip MetaWorks1.9.0.zip
-cd MetaWorks1.9.0
+[Available dataflows](#available-dataflows)  
 
-# edit config_testing_COI_data.yaml file to customize path to CO1v4 classifier properties file (line 131)
+[Pipeline details](#pipeline-details)  
 
-# create the latest conda environment and activate it
-conda env create -f environment.yml
-conda activate MetaWorks_v1.9.0
+[Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline)    
 
-# run the pipeline on the COI test data
-snakemake --jobs 1 --configfile config_testing_COI_data.yaml --snakefile snakefile_ESV
-```
+[Quick start exmaple using COI test data](#quick-start-example-using-COI-test-data)  
 
-Once you have the results.csv file, results can be imported into R for further analysis.  If you need an ESV table for downstream analysis this can be generated in R as well [How to create an ESV table](#how-to-create-an-esv-table).
+[Tutorial](#tutorial)
 
-## Available dataflows:
+[Implementation notes](#implementation-notes)  
+
+[How to cite](#how-to-cite)  
+
+[References](#references)  
+
+## Overview
+
+MetaWorks comes with a conda environment file MetaWorks_v1.9.0 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+
+Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
+
+
+**Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.**. 
+
+<img src="/images/conda_env.png" width="500">
+
+
+The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
+
+The snakefile describes the pipeline itself and normally does not need to be edited in any way (Fig 2).  
+
+
+**Fig 2. The snakefile describes the programs used, the settings, and the order in which to run commands.**  
+The pipeline takes care of any reformatting needed when moving from one step to another.  In addition to the final results file, a summary of statistics and log files are also available for major steps in the pipeline.
+
+<img src="/images/dataflow.png" width="500">
+
+The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed you have the option to filter out putative pseudogenes (Porter and Hajibabaei, 2021).  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support (Fig 3).
+
+**Fig 3. The RDP classifier produces a measure of confidence for taxonomic assignments at each rank.**  
+Results can be filtered by bootstrap support values to reduce false-positive assignments.  The appropriate cutoffs to use for filtering will depend on the marker/classifier used, query length, and taxonomic rank.  See links in Table 1 for classifier-specific cutoffs to ensure 95-99% accuracy.
+
+<img src="/images/taxonomic_assignments.png" width="500">
+
+## Available dataflows
 
 1. The **default dataflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Note that the reverse primer should be reverse-complemented in the adapters.fasta file.  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  If any of these amplicons are nested within each other, then the primers should be 'anchored' in the adapters.fasta file, see /testing/adapters_anchored.fasta .  Different marker genes should be processed separately, E.g. COI, ITS, rbcL.
 
@@ -71,69 +98,6 @@ snakemake --jobs 24 --snakefile snakefile_dualIndexedSamples --configfile config
 ```
 
 These dataflows will be updated on a regular basis so check for the latest version at https://github.com/terrimporter/MetaWorks/releases .  Note that the OTU and global ESV pipelines above are new and have only been tested with the 16S and ITS markers.
-
-## How to cite
-
-If you use this dataflow or any of the provided scripts, please cite the MetaWorks preprint:  
-Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
-
-You can also site this repository:
-Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.0). Zenodo. http://doi.org/10.5281/zenodo.4741407 
-
-If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
-Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
-
-If you use the pseudogene filtering methods, please cite the pseudogene publication:
-Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BMC Bioinformatics, 22: 256. 
-
-If you use the RDP classifier, please cite the publication:  
-Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
-
-## Outline
-
-[Overview](#overview)  
-
-[Pipeline details](#pipeline-details)  
-
-[Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline)   
-
-[Implementation notes](#implementation-notes)  
-
-[Tutorial](#tutorial)
-
-[References](#references)  
-
-## Overview
-
-MetaWorks comes with a conda environment file MetaWorks_v1.9.0 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
-
-Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run (Fig 1).
-
-
-**Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.**. 
-
-<img src="/images/conda_env.png" width="500">
-
-
-The configuration file is edited by the user to specify directory names, indicate the sample and read fields from the sequence filenames, and specify other required pipeline parameters such as primer sequences, marker name, and whether or not pseudogene filtering should be run.
-
-The snakefile describes the pipeline itself and normally does not need to be edited in any way (Fig 2).  
-
-
-**Fig 2. The snakefile describes the programs used, the settings, and the order in which to run commands.**  
-The pipeline takes care of any reformatting needed when moving from one step to another.  In addition to the final results file, a summary of statistics and log files are also available for major steps in the pipeline.
-
-<img src="/images/dataflow.png" width="500">
-
-
-The pipeline begins with raw paired-end Illumina MiSeq fastq.gz files.  Reads are paired.  Primers are trimmed.  All the samples are pooled for a global analysis.  Reads are dereplicated, denoised, and chimeric sequences are removed producing a reference set of denoised exact sequence variants (ESVs). At this step, the pipeline diverges into several paths:  an ITS specific dataflow, a regular dataflow, and a pseudogene filtering dataflow.  For ITS sequences, flanking rRNA gene regions are removed then they are taxonomically assigned.  For the regular pipeline, the denoised ESVs are taxonomically assigned using the RDP classifier.  If a protein coding marker is being processed you have the option to filter out putative pseudogenes (Porter and Hajibabaei, 2021).  The result is a report containing a list of ESVs for each sample, with read counts, and taxonomic assignments with a measure of bootstrap support (Fig 3).
-
-
-**Fig 3. The RDP classifier produces a measure of confidence for taxonomic assignments at each rank.**  
-Results can be filtered by bootstrap support values to reduce false-positive assignments.  The appropriate cutoffs to use for filtering will depend on the marker/classifier used, query length, and taxonomic rank.  See links in Table 1 for classifier-specific cutoffs to ensure 95-99% accuracy.
-
-<img src="/images/taxonomic_assignments.png" width="500">
-
 
 ## Pipeline details
 
@@ -250,6 +214,136 @@ snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ```
 
 7. When you are done, deactivate the conda environment:
+
+```linux
+conda deactivate
+```
+
+## Quick start example using COI test data
+
+This MetaWorks quick start assumes that you have already installed the CO1 Classifier available from https://github.com/terrimporter/CO1Classifier .  If you have not already done so, load the CO1 Classifier by following the quickstart instructions on the CO1 Classifier GitHub page.  It also assumes that you already have conda installed, otherwise see [Prepare your environment to run the pipeline](#prepare-your-environment-to-run-the-pipeline).
+
+```linux
+# download latest version of MetaWorks
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.0/MetaWorks1.9.0.zip
+unzip MetaWorks1.9.0.zip
+cd MetaWorks1.9.0
+
+# edit config_testing_COI_data.yaml file to customize path to CO1v4 classifier properties file (line 131)
+
+# create the latest conda environment and activate it
+conda env create -f environment.yml
+conda activate MetaWorks_v1.9.0
+
+# run the pipeline on the COI test data
+snakemake --jobs 1 --configfile config_testing_COI_data.yaml --snakefile snakefile_ESV
+```
+
+Once you have the results.csv file, results can be imported into R for further analysis.  If you need an ESV table for downstream analysis this can be generated in R as well [How to create an ESV table](#how-to-create-an-esv-table).
+
+## Tutorial
+
+We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
+
+**Step 1.  Prepare your environment for the pipeline.**
+
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.9.0 by using wget from the command line:
+
+```linux
+# download the pipeline
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.0/MetaWorks1.9.0.tar.gz
+
+# unzip the pipeline
+unzip MetaWorks1.9.0.zip
+```
+
+If you don't already have conda on your system, then you will need to install it:
+
+```linux
+# Download miniconda3
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# Install miniconda3 and initialize
+sh Miniconda3-latest-Linux-x86_64.sh
+
+# Add conda to your PATH
+# If you do not have a bin folder in your home directory, then create one first.
+mkdir ~/bin
+
+# Enter bin folder
+cd ~/bin
+
+# Create symbolic link to conda
+ln -s ~/miniconda3/bin/conda conda
+```
+
+Create then activate the MetaWorks_v1.9.0 environment:
+
+```linux
+# Move into the MetaWorks folder
+cd MetaWorks1.9.0
+
+# Create the environment from the provided environment.yml file .  Only need to do this step once.
+conda env create -f environment.yml
+
+# Activate the environment.  Do this everytime before running the pipeline.
+conda activate MetaWorks_v1.9.0
+
+```
+
+To taxonomically assign COI metabarocodes, you will  need to install the RDP-trained COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
+
+```linux
+# download the COIv4 classifier
+wget https://github.com/terrimporter/CO1Classifier/releases/download/v4/CO1v4_trained.tar.gz
+
+# decompress the file
+tar -xvzf CO1v4_trained.tar.gz
+
+# Note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
+```
+
+If you wish to filter out putative pseudogenes, if you do not already have the NCBI ORFfinder installed on your system, then download it from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  You can download it using wget then make it executable in your path:
+
+```linux
+# download
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
+
+# decompress
+gunzip ORFfinder.gz
+
+# make executable
+chmod 755 ORFfinder
+
+# If you do not have a bin folder in your home directory, then create one first.
+mkdir ~/bin
+
+# put in your PATH (ex. ~/bin).
+mv ORFfinder ~/bin/.
+```
+
+**Step 2.  Run MetaWorks using the COI testing data provided.**
+
+The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, still need to add the path to the trained COI classifier and save your changes.
+
+```linux
+RDP:
+# If you are using a custom-trained reference set 
+# enter the path to the trained RDP classifier rRNAClassifier.properties file here:
+    t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
+```    
+  
+Then you should be ready to run the MetaWorks pipeline on the testing data.
+    
+```linux
+# You may need to edit the number of jobs you would like to run, ex --jobs 1 or --jobs 4, according to how many cores you have available
+snakemake --jobs 2 --snakefile snakefile --configfile config_testing_COI_data.yaml
+```
+
+**Step 3.  Analyze the output.**
+The final output file is called results.csv .  The results are for the COI-BR5 amplicon.  This can be imported into R for bootstrap support filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
+
+If you are done with MetaWorks, deactivate the conda environment:
 
 ```linux
 conda deactivate
@@ -423,113 +517,22 @@ Run snakemake.  Move chordata outfiles into their own directory so they do not g
 
 The invertebrate and chordata results.csv files can then be combined prior to downstream processing.  
 
-## Tutorial
+## How to cite
 
-We have provided a small set of COI paired-end Illumina MiSeq files for this tutorial.  These sequence files contain reads for several pooled COI amplicons, but here we will focus on the COI-BR5 amplicon (Hajibabaei et al., 2012, Gibson et al., 2014).
+If you use this dataflow or any of the provided scripts, please cite the MetaWorks preprint:  
+Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
-**Step 1.  Prepare your environment for the pipeline.**
+You can also site this repository:
+Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.0). Zenodo. http://doi.org/10.5281/zenodo.4741407 
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.9.0 by using wget from the command line:
+If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
+Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
 
-```linux
-# download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.0/MetaWorks1.9.0.tar.gz
+If you use the pseudogene filtering methods, please cite the pseudogene publication:
+Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BMC Bioinformatics, 22: 256. 
 
-# unzip the pipeline
-unzip MetaWorks1.9.0.zip
-```
-
-If you don't already have conda on your system, then you will need to install it:
-
-```linux
-# Download miniconda3
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-
-# Install miniconda3 and initialize
-sh Miniconda3-latest-Linux-x86_64.sh
-
-# Add conda to your PATH
-# If you do not have a bin folder in your home directory, then create one first.
-mkdir ~/bin
-
-# Enter bin folder
-cd ~/bin
-
-# Create symbolic link to conda
-ln -s ~/miniconda3/bin/conda conda
-```
-
-Create then activate the MetaWorks_v1.9.0 environment:
-
-```linux
-# Move into the MetaWorks folder
-cd MetaWorks1.9.0
-
-# Create the environment from the provided environment.yml file .  Only need to do this step once.
-conda env create -f environment.yml
-
-# Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1.9.0
-
-```
-
-To taxonomically assign COI metabarocodes, you will  need to install the RDP-trained COI Classifier from https://github.com/terrimporter/CO1Classifier/releases/tag/v4 .  You can do this at the command line using wget.
-
-```linux
-# download the COIv4 classifier
-wget https://github.com/terrimporter/CO1Classifier/releases/download/v4/CO1v4_trained.tar.gz
-
-# decompress the file
-tar -xvzf CO1v4_trained.tar.gz
-
-# Note the full path to the rRNAClassifier.properties file, ex. mydata_trained/rRNAClassifier.properties
-```
-
-If you wish to filter out putative pseudogenes, if you do not already have the NCBI ORFfinder installed on your system, then download it from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  You can download it using wget then make it executable in your path:
-
-```linux
-# download
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
-
-# decompress
-gunzip ORFfinder.gz
-
-# make executable
-chmod 755 ORFfinder
-
-# If you do not have a bin folder in your home directory, then create one first.
-mkdir ~/bin
-
-# put in your PATH (ex. ~/bin).
-mv ORFfinder ~/bin/.
-```
-
-**Step 2.  Run MetaWorks using the COI testing data provided.**
-
-The config_testing_COI_data.yaml file has been 'preset' to work with the COI_data files in the testing folder.  You will, however, still need to add the path to the trained COI classifier and save your changes.
-
-```linux
-RDP:
-# If you are using a custom-trained reference set 
-# enter the path to the trained RDP classifier rRNAClassifier.properties file here:
-    t: "/path/to/CO1Classifier/v4/mydata_trained/rRNAClassifier.properties"
-```    
-  
-Then you should be ready to run the MetaWorks pipeline on the testing data.
-    
-```linux
-# You may need to edit the number of jobs you would like to run, ex --jobs 1 or --jobs 4, according to how many cores you have available
-snakemake --jobs 2 --snakefile snakefile --configfile config_testing_COI_data.yaml
-```
-
-**Step 3.  Analyze the output.**
-The final output file is called results.csv .  The results are for the COI-BR5 amplicon.  This can be imported into R for bootstrap support filtering, pivot table creation, normalization, vegan analysis, etc.  There are also a number of other output files in the stats directory showing the total number of reads processed at each step as well as the sequence lengths.  Log files are also available for the dereplication, denoising, and chimera removal steps.
-
-If you are done with MetaWorks, deactivate the conda environment:
-
-```linux
-conda deactivate
-```
+If you use the RDP classifier, please cite the publication:  
+Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
 ## References
 
