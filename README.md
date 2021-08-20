@@ -53,7 +53,7 @@ Results can be filtered by bootstrap support values to reduce false-positive ass
 
 ## Available workflows
 
-1. The **default workflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Note that the reverse primer should be reverse-complemented in the adapters.fasta file.  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  If any of these amplicons are nested within each other, then the primers should be 'anchored' in the adapters.fasta file, see /testing/adapters_anchored.fasta .  Different marker genes should be processed separately, E.g. COI, ITS, rbcL.
+1. The **default workflow** starts with Illumina paired-end demultiplexed fastq files and generates taxonomically assigned exact sequence variants (ESVs).  An adapters.fasta file is required to identify the forward and reverse primers to remove.  An example is available in /testing/adapters.fasta .  Note that the reverse primer should be reverse-complemented in the adapters.fasta file.  Multiple primers sets for the same marker gene can be processed at the same time, E.g. COI_BR5, COI_F230R, COI_mljg.  When pseudogene-filtering is performed, taxonomic groups with different genetic codes should be processed separately (see [How to filter pseudogenes for taxa with different genetic codes](#how-to-filter-pseudogenes-for-taxa-with-different-genetic-codes)).  Different marker genes should be processed separately, E.g. COI, ITS, rbcL.
 
 ```linux
 # quickstart default ESV pipeline
@@ -437,7 +437,7 @@ Test ORFfinder:
 ORFfinder
 ```
 
-### Use the bold.hmm with the pseudogene removal pipeline
+### Use the Arthropod bold.hmm with the pseudogene removal pipeline
 
 Ensure that bold.hmm as well as the indexed files (bold.hmm.h3p, bold.hmm.h3m, bold.hmm.h3i, and bold.hmm.h3f) are available in the same directory as you snakefile.
 
