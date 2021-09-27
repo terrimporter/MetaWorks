@@ -515,6 +515,13 @@ Run snakemake.  Move chordata outfiles into their own directory so they do not g
 
 The invertebrate and chordata results.csv files can then be combined prior to downstream processing.  
 
+### The final output file isn't created
+
+If you get a warning and see that the last file created was rdp.csv.tmp but not the expected results.csv then you probably are probably trying to process a very large number of sequence files (thousands) and the job ran into memory problems preventing the creation of the final results.csv file.  You have a few options here:
+a) Re-run the pipeline with more memory so that the final outfile can be created.  On the GPSC, you will need to create an interactive container, activate the conda environbment, then unlock the snakemake directory first before submitting another job with more memory on a large compute node.
+b) Stop here.  You can still use the ESV.table file together with the rdp.csv.tmp file for further processing in R.  Don't forget to filter out sequence clusters with only 1 or 2 reads from the ESV.table (a step that was done automatically by MetaWorks).  For each sequence cluster in the ESV.table, you can grab the taxonomy from the rdp.csv.tmp file using the ZotuID (sequence cluster ID).
+c) There is a new MetaWorks workflow being created that handles analyses with very large number of samples more efficiently (in progress).
+
 ## How to cite
 
 If you use this dataflow or any of the provided scripts, please cite the MetaWorks preprint:  
@@ -570,4 +577,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: September 15, 2021
+Last updated: September 27, 2021
