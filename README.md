@@ -26,7 +26,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 ## Overview
 
-MetaWorks comes with a conda environment file MetaWorks_v1.9.4 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
+MetaWorks comes with a conda environment file MetaWorks_v1.9.5 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run the any one of the workflows described described in the next section (Fig 1).
 
@@ -64,7 +64,7 @@ snakemake --jobs 24 --snakefile snakefile_ESV --configfile config_ESV.yaml
 
 ```linux
 # quickstart OTU pipeline
-snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_ESV.yaml
+snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_OTU.yaml
 ```
 
 3. This workflow starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of ESV IDs consistent accross all samples *sequenced at different times* to which all ESVs will be mapped. This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent ESV IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
@@ -157,10 +157,10 @@ The final output file is results.csv and it has been formatted to specify ESVs f
 conda env create -f environment.yml
 
 # Activate the environment
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 
 # On the GPSC activate using source
-source ~/miniconda/bin/activate MetaWorks_v1.9.4
+source ~/miniconda/bin/activate MetaWorks_v1.9.5
 ```
 
 2. The RDP classifier comes with the training sets to classify 16S, fungal LSU or ITS rDNA.  To classify other markers using custom-trained RDP sets, obtain these from GitHub using Table 1 as a guide .  Take note of where the rRNAclassifier.properties file is as this needs to be added to the config.yaml .
@@ -172,11 +172,11 @@ RDP:
 
 3. If doing pseudogene filtering, then download and install the NCBI ORFfinder
 
-The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your conda environment path (ex. ~/miniconda/envs/MetaWorks_v1.9.4/bin).
+The pipeline requires ORFfinder 0.4.3 available from the NCBI at ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ .  This program should be downloaded, made executable, and put in your conda environment path (ex. ~/miniconda/envs/MetaWorks_v1.9.5/bin).
 
 ```linux
 # go to your conda environment bin
-cd ~/miniconda3/envs/MetaWorks_v1.9.4/bin/.
+cd ~/miniconda3/envs/MetaWorks_v1.9.5/bin/.
 
 # download ORFfinder
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/ORFfinder.gz
@@ -223,15 +223,15 @@ This MetaWorks quick start assumes that you have already installed the CO1 Class
 
 ```linux
 # download latest version of MetaWorks
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.4/MetaWorks1.9.4.zip
-unzip MetaWorks1.9.4.zip
-cd MetaWorks1.9.4
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.5/MetaWorks1.9.5.zip
+unzip MetaWorks1.9.5.zip
+cd MetaWorks1.9.5
 
 # edit config_testing_COI_data.yaml file to customize path to CO1v4 classifier properties file (line 131)
 
 # create the latest conda environment and activate it
 conda env create -f environment.yml
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 
 # run the pipeline on the COI test data
 snakemake --jobs 1 --configfile config_testing_COI_data.yaml --snakefile snakefile_ESV
@@ -245,14 +245,14 @@ We have provided a small set of COI paired-end Illumina MiSeq files for this tut
 
 **Step 1.  Prepare your environment for the pipeline.**
 
-Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.9.4 by using wget from the command line:
+Begin by downloading the latest MetaWorks release available at https://github.com/terrimporter/MetaWorks/releases/tag/v1.9.5 by using wget from the command line:
 
 ```linux
 # download the pipeline
-wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.4/MetaWorks1.9.4.tar.gz
+wget https://github.com/terrimporter/MetaWorks/releases/download/v1.9.5/MetaWorks1.9.5.tar.gz
 
 # unzip the pipeline
-unzip MetaWorks1.9.4.zip
+unzip MetaWorks1.9.5.zip
 ```
 
 If you don't already have conda on your system, then you will need to install it:
@@ -275,17 +275,17 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 ```
 
-Create then activate the MetaWorks_v1.9.4 environment:
+Create then activate the MetaWorks_v1.9.5 environment:
 
 ```linux
 # Move into the MetaWorks folder
-cd MetaWorks1.9.4
+cd MetaWorks1.9.5
 
 # Create the environment from the provided environment.yml file .  Only need to do this step once.
 conda env create -f environment.yml
 
 # Activate the environment.  Do this everytime before running the pipeline.
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 
 ```
 
@@ -367,10 +367,10 @@ cd ~/bin
 ln -s ~/miniconda3/bin/conda conda
 
 # Activate conda method 1 (working in a container)
-source ~/miniconda3/bin/activate MetaWorks_v1.9.4
+source ~/miniconda3/bin/activate MetaWorks_v1.9.5
 
 # Activate conda method 2
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 ```
 
 ### Checking program versions
@@ -382,7 +382,7 @@ Ensure the program versions in the environment are being used.
 conda env create -f environment.yml
 
 # activate the environment
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 
 # list all programs available in the environment at once
 conda list > programs.list
@@ -407,11 +407,11 @@ If you have an older version of GLIBC, then you may be missing libraries that OR
 Create a symbolic link to the library:
 
 ```linux
-cd ~/miniconda3/envs/MetaWorks_v1.9.4/lib
+cd ~/miniconda3/envs/MetaWorks_v1.9.5/lib
 ln -s ../glibc-2.14/lib/libc.so.6 libc.so.6
 ```
 
-Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1.9.4/etc/conda/activate.d/LD_PATH.sh
+Create the shell script file LD_PATH.sh in the following location to set the environment variable: ~/miniconda3/envs/MetaWorks_v1.9.5/etc/conda/activate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -421,7 +421,7 @@ export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
 Create the file LD_PATH.sh in the following location to unset the environment variable:  
-~/miniconda3/envs/MetaWorks_v1.9.4/etc/conda/deactivate.d/LD_PATH.sh
+~/miniconda3/envs/MetaWorks_v1.9.5/etc/conda/deactivate.d/LD_PATH.sh
 
 Put the following text in the LD_PATH.sh file:
 
@@ -475,7 +475,7 @@ nohup snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 # to start a screen session
 screen
 ctrl+a+c
-conda activate MetaWorks_v1.9.4
+conda activate MetaWorks_v1.9.5
 snakemake --jobs 24 --snakefile snakefile --configfile config.yaml
 ctrl+a+d
 
@@ -528,7 +528,7 @@ If you use this dataflow or any of the provided scripts, please cite the MetaWor
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
 You can also site this repository:
-Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.4). Zenodo. http://doi.org/10.5281/zenodo.4741407 
+Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.5). Zenodo. http://doi.org/10.5281/zenodo.4741407 
 
 If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
@@ -577,4 +577,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: September 27, 2021
+Last updated: October 14, 2021
