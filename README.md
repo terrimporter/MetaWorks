@@ -1,6 +1,6 @@
 # MetaWorks: A Multi-Marker Metabarcode Pipeline
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4741407.svg)](https://doi.org/10.5281/zenodo.4741407)  
+[![DOI](https://zenodo.org/badge/274991482.svg)](https://zenodo.org/badge/latestdoi/274991482)  
 
 MetaWorks consists of a conda environment and Snakemake pipelines that are meant to be run at the command line to bioinformatically processes de-multiplexed Illumina paired-end metabarcodes from raw reads through to taxonomic assignments. MetaWorks currently supports a number of popular marker gene amplicons and metabarcodes: COI (eukaryotes), rbcL (eukaryotes, diatoms), ITS (fungi, plants), 16S (prokaryotes), 18S (eukaryotes, diatoms), 12S (fish, vertebrates), and 28S (fungi).  Taxonomic assignments are made using the RDP classifier that uses a naive Bayesian method to produce taxonomic assignments with a measure of statistical support at each rank. 
 
@@ -528,7 +528,7 @@ If you use this dataflow or any of the provided scripts, please cite the MetaWor
 Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
 
 You can also site this repository:
-Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.5). Zenodo. http://doi.org/10.5281/zenodo.4741407 
+Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.9.5). Zenodo. https://zenodo.org/badge/latestdoi/274991482  
 
 If you use this dataflow for making COI taxonomic assignments, please cite the COI classifier publication:  
 Porter, T. M., & Hajibabaei, M. (2018). Automated high throughput animal CO1 metabarcode classification. Scientific Reports, 8, 4226.  
