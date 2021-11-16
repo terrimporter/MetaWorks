@@ -128,7 +128,8 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | SSU (18S) | Eukaryotes | https://github.com/terrimporter/18SClassifier |
 | SSU (16S) | Prokaryotes | Built-in to the RDP classifier |
 | ITS | Fungi (Warcup) | Built-in to the RDP classifier |
-| ITS | Fungi (UNITE) | https://github.com/terrimporter/UNITE_ITSClassifier |
+| ITS | Fungi (2014 UNITE) | Built-in to the RDP classifier |
+| ITS | Fungi (2021 UNITE) | https://github.com/terrimporter/UNITE_ITSClassifier |
 | ITS | Plants (PLANiTS) | https://github.com/terrimporter/PLANiTS_ITSClassifier |
 | LSU | Fungi | Built-in to the RDP classifier |
 
