@@ -28,7 +28,7 @@ MetaWorks consists of a conda environment and Snakemake pipelines that are meant
 
 MetaWorks comes with a conda environment file MetaWorks_v1.9.5 that should be activated before running the pipeline.  Conda is an environment and package manager (Anaconda, 2016).  The environment file contains most of the programs and dependencies needed to run MetaWorks.  If pseudogene filtering will be used, then the NCBI ORFfinder program will also need to be installed.  Additional RDP-trained reference sets may need to be downloaded if the reference set needed is not already built in to the RDP classifier (see Table 1 below).
 
-Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run the any one of the workflows described described in the next section (Fig 1).
+Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run the workflows described described in the next section (Fig 1).
 
 
 **Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.**. 
