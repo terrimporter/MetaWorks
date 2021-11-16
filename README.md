@@ -74,7 +74,7 @@ snakemake --jobs 24 --snakefile snakefile_OTU --configfile config_OTU.yaml
 snakemake --jobs 24 --snakefile snakefile_ESV_global --configfile config_ESV_global.yaml
 ```
 
-4. The global OTU workflow starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of OTU IDs consistent across all samples *sequenced at different times* to which all denoised ESVs willb e mapped.  This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent OTU IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
+4. The global OTU workflow starts with the taxonomically assigned ESVs from the default dataflow and generates a GLOBAL set of OTU IDs consistent across all samples *sequenced at different times* to which all denoised ESVs will be mapped.  This script may be useful when it is ideal to bioinformatically process samples one season at a time (or one trial at a time, or one year at a time) but still have a consistent set of equivalent OTU IDs project-wide to facilitate multi-season (or multi-trial, or multi-year) comparisons in downstream analyses.
 
 ```linux
 # quickstart global OTU pipeline
