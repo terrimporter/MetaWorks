@@ -31,7 +31,7 @@ MetaWorks comes with a conda environment file MetaWorks_v1.9.5 that should be ac
 Snakemake is a python-based workflow manager (Koster and Rahmann, 2012) and it requires three sets of files to run the workflows described described in the next section (Fig 1).
 
 
-**Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.**. 
+**Fig 1.  Using a conda environment helps to quickly gather programs and dependencies used by MetaWorks.** 
 
 <img src="/images/conda_env.png" width="500">
 
