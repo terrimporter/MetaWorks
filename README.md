@@ -402,7 +402,7 @@ Version numbers are also tracked in the snakefile.
 
 ### Add libraries for ORFfinder
 
-## Resolving GLIBC errors
+#### Resolving GLIBC errors
 
 If you have an older version of GLIBC (on Centos6), then you may be missing the libc.so.6 file that ORffinder needs.  This file is already available, but you need to create some links yourself.
 
@@ -439,7 +439,7 @@ Test ORFfinder:
 ORFfinder
 ```
 
-## Resolving libnghttp2 errors
+#### Resolving libnghttp2 errors
 
 The missing library (on Centos7), is already available, only the LD_LIBRARY_PATH needs to be updated as follows:
 
