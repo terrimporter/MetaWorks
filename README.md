@@ -126,9 +126,10 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | 12S | Vertebrates | https://github.com/terrimporter/12SvertebrateClassifier |
 | SSU (18S) | Diatoms | https://github.com/terrimporter/SSUdiatomClassifier |
 | SSU (18S) | Eukaryotes | https://github.com/terrimporter/18SClassifier |
-| SSU (16S) | Prokaryotes | Built-in to the RDP classifier |
-| ITS | Fungi (Warcup) | Built-in to the RDP classifier |
-| ITS | Fungi (UNITE) | https://github.com/terrimporter/UNITE_ITSClassifier |
+| SSU (16S) | Prokaryotes | Built-in to the RDP classifier |  
+| ITS | Fungi (Warcup) | Built-in to the RDP classifier |  
+| ITS | Fungi (UNITE 2014) | Built-in to the RDP classifier |  
+| ITS | Fungi (UNITE 2021) | https://github.com/terrimporter/UNITE_ITSClassifier |
 | ITS | Plants (PLANiTS) | https://github.com/terrimporter/PLANiTS_ITSClassifier |
 | LSU | Fungi | Built-in to the RDP classifier |
 
@@ -609,4 +610,4 @@ St. John, J. (2016, Downloaded). SeqPrep. Retrieved from https://github.com/jstj
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: December 13, 2021
+Last updated: December 14, 2021
