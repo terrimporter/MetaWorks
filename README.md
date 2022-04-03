@@ -125,6 +125,7 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | 12S | Fish | https://github.com/terrimporter/12SfishClassifier |
 | 12S | Vertebrates | https://github.com/terrimporter/12SvertebrateClassifier |
 | SSU (18S) | Diatoms | https://github.com/terrimporter/SSUdiatomClassifier |
+| SSU (16S) | Vertebrates | https://github.com/terrimporter/16SvertebrateClassifier |  
 | SSU (18S) | Eukaryotes | https://github.com/terrimporter/18SClassifier |
 | SSU (16S) | Prokaryotes | Built-in to the RDP classifier |  
 | ITS | Fungi (Warcup) | Built-in to the RDP classifier |  
