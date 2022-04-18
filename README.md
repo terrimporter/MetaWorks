@@ -121,7 +121,8 @@ For the standard pipeline (ideal for rRNA genes) performs taxonomic assignments 
 | ------ | ----------- | ----------------------- |
 | COI | Eukaryotes | https://github.com/terrimporter/CO1Classifier |
 | rbcL | Diatoms | https://github.com/terrimporter/rbcLdiatomClassifier |
-| rbcL | Eukarytoes | https://github.com/terrimporter/rbcLClassifier |
+| rbcL | Eukaryotes | https://github.com/terrimporter/rbcLClassifier |
+| rbcL | Land Plants | https://github.com/terrimporter/rbcL_landPlant_Classifier |  
 | 12S | Fish | https://github.com/terrimporter/12SfishClassifier |
 | 12S | Vertebrates | https://github.com/terrimporter/12SvertebrateClassifier |
 | SSU (18S) | Diatoms | https://github.com/terrimporter/SSUdiatomClassifier |
