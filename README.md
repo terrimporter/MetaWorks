@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4741407.svg)](https://doi.org/10.5281/zenodo.4741407)  
 
-MetaWorks is a multi-marker metabarcode pipeline.  Produces  exact sequence variants and/or operational taxonomic units.  Supports a number of popular metabarcoding markers: COI, rbcL, ITS, SSU rRNA, and 12S SSU mtDNA.  See the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite) for installation instructions, quickstart guides, FAQs, and tutorial.
+MetaWorks generates exact sequence variants and/or operational taxonomic units and taxonomically assigns them.  Supports a number of popular metabarcoding markers: COI, rbcL, ITS, SSU rRNA, and 12S SSU mtDNA.  See the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite) for installation instructions, quickstart guides, FAQs, and tutorial.
 
 ## Installation
 
