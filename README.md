@@ -43,7 +43,7 @@ Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Cl
 
 ## Papers & projects that use MetaWorks
 
-Edge TA, Baird DJ, Bilodeau G, Gagné N, Greer C, Konkin D, et al. 2020.  The Ecobiomics project: Advancing metagenomics assessment of soil health and freshwater quality in Canada. Science of The Total Environment, 710: 135906. doi:10.1016/j.scitotenv.2019.135906![image](https://user-images.githubusercontent.com/34171056/181351437-084aa653-91e6-4071-941b-7b211d89429a.png)
+Edge TA, Baird DJ, Bilodeau G, Gagné N, Greer C, Konkin D, et al. 2020.  The Ecobiomics project: Advancing metagenomics assessment of soil health and freshwater quality in Canada. Science of The Total Environment, 710: 135906. doi:10.1016/j.scitotenv.2019.135906
 
 Moir, C. 2021. No Stomach, No Problem: an Integrated Morpho-Molecular Approach to Assessing the Diets of the Cunner Wrasse, Tautogolabrus adspersus, among Coastal, Nearshore Regions of Atlantic Canada (Doctoral dissertation, University of Guelph).
 
@@ -57,6 +57,6 @@ Robinson, CV, Porter, TM, Maitland, VC, Wright, MT and Hajibabaei, M. 2021. Mult
 
 Rudar, J, Golding, GB, Kremer, SC and Hajibabaei, M. 2022. Decision Tree Ensembles Utilizing Multivariate Splits Are Effective at Investigating Beta-Diversity in Medically Relevant 16S Amplicon Sequencing Data. bioRxiv.
 
-Smenderovac E, Emilson C, Porter T, Morris D, Hazlett P, Diochon A, et al. 2022.  Forest soil biotic communities show few responses to wood ash applications at multiple sites across Canada. Sci Rep., 12: 4171. doi:10.1038/s41598-022-07670-x![image](https://user-images.githubusercontent.com/34171056/181351582-1d51af83-636e-4470-8e9f-d3e7cce33755.png)
+Smenderovac E, Emilson C, Porter T, Morris D, Hazlett P, Diochon A, et al. 2022.  Forest soil biotic communities show few responses to wood ash applications at multiple sites across Canada. Sci Rep., 12: 4171. doi:10.1038/s41598-022-07670-x
 
 Last updated: July 27, 2022
