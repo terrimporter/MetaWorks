@@ -14,7 +14,7 @@ Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorks
 
 Instructions for loading the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1).
 
-Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1).
+Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1) that can be used with MetaWorks.
 
 ## Documentation
 
