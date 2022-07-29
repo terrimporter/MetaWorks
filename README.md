@@ -10,9 +10,11 @@ MetaWorks runs at the command-line on linux x86-64 in a conda environment (provi
 
 Instructions for installing [conda](https://terrimporter.github.io/MetaWorksSite/faq/) (if not already installed).
 
-Instructions for installling [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1) if pseudogene-filtering will be run (optional).
+Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1) if pseudogene-filtering will be run (optional).
 
-Instructions for loading the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/workflows/).
+Instructions for loading the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1).
+
+Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1).
 
 ## Documentation
 
