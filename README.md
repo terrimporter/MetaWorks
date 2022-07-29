@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4741407.svg)](https://doi.org/10.5281/zenodo.4741407)  
 
-MetaWorks generates exact sequence variants and/or operational taxonomic units and taxonomically assigns them.  Supports a number of popular metabarcoding markers: COI, rbcL, ITS, SSU rRNA, and 12S SSU mtDNA.  See the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite) for installation instructions, quickstart guides, FAQs, and tutorial.
+MetaWorks generates exact sequence variants and/or operational taxonomic units and taxonomically assigns them.  Supports a number of popular metabarcoding markers: COI, rbcL, ITS, SSU rRNA, and 12S SSU mtDNA.  See the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite) for quickstart guides, additional pipeline details, FAQs, and a step-by-step tutorial that includes installation.
 
 ## Installation
 
@@ -18,11 +18,11 @@ Instructions for loading the [MetaWorks conda environment](https://terrimporter.
 
 A [quickstart](https://terrimporter.github.io/MetaWorksSite/quickstart/) guide to various workflows.
 
-A [detailed](https://terrimporter.github.io/MetaWorksSite/workflows/) explanation of MetaWorks workflows.
+A [detailed](https://terrimporter.github.io/MetaWorksSite/details/) explanation of MetaWorks workflows.
 
 A [tutorial](https://terrimporter.github.io/MetaWorksSite/tutorial/) using provided test data to get up and running quickly.
 
-Additional documentation and FAQs are available on the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite/).
+*NEW* We added answers to some frequently asked questions (FAQs) about MetaWorks and data analysis to the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite/faq).
 
 ## How to cite
 
@@ -59,4 +59,4 @@ Rudar, J, Golding, GB, Kremer, SC and Hajibabaei, M. 2022. Decision Tree Ensembl
 
 Smenderovac E, Emilson C, Porter T, Morris D, Hazlett P, Diochon A, et al. 2022.  Forest soil biotic communities show few responses to wood ash applications at multiple sites across Canada. Sci Rep., 12: 4171. doi:10.1038/s41598-022-07670-x
 
-Last updated: July 27, 2022
+Last updated: July 29, 2022
