@@ -43,22 +43,4 @@ Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence anal
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-## Papers & projects that use MetaWorks
-
-Edge TA, Baird DJ, Bilodeau G, Gagné N, Greer C, Konkin D, et al. 2020.  The Ecobiomics project: Advancing metagenomics assessment of soil health and freshwater quality in Canada. Science of The Total Environment, 710: 135906. doi:10.1016/j.scitotenv.2019.135906
-
-Moir, C. 2021. No Stomach, No Problem: an Integrated Morpho-Molecular Approach to Assessing the Diets of the Cunner Wrasse, Tautogolabrus adspersus, among Coastal, Nearshore Regions of Atlantic Canada (Doctoral dissertation, University of Guelph).
-
-Porter, TM & Hajibabaei, M, 2020. METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments. bioRxiv.
-
-Porter, TM, & Hajibabaei, M. (2021). Profile hidden Markov model sequence analysis can help remove putative pseudogenes from DNA barcoding and metabarcoding datasets. BMC Bioinformatics, 22(1): 256. doi: 10.1186/s12859-021-04180-x
-
-Robinson, CV, Baird, DJ, Wright, MTG, Porter, TM, Hartwig, K, Hendriks, E, Maclean, L, Mallinson, R, Monk, WA, Paquette, C and Hajibabaei, M. 2021. Combining DNA and people power for healthy rivers: Implementing the STREAM community-based approach for global freshwater monitoring. Perspectives in Ecology and Conservation, 19(3): 279-285.
-
-Robinson, CV, Porter, TM, Maitland, VC, Wright, MT and Hajibabaei, M. 2021. Multi-marker metabarcoding resolves subtle variations in freshwater condition: Bioindicators, ecological traits, and trophic interactions. bioRxiv.
-
-Rudar, J, Golding, GB, Kremer, SC and Hajibabaei, M. 2022. Decision Tree Ensembles Utilizing Multivariate Splits Are Effective at Investigating Beta-Diversity in Medically Relevant 16S Amplicon Sequencing Data. bioRxiv.
-
-Smenderovac E, Emilson C, Porter T, Morris D, Hazlett P, Diochon A, et al. 2022.  Forest soil biotic communities show few responses to wood ash applications at multiple sites across Canada. Sci Rep., 12: 4171. doi:10.1038/s41598-022-07670-x
-
 Last updated: July 29, 2022
