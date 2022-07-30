@@ -8,13 +8,13 @@ MetaWorks generates exact sequence variants and/or operational taxonomic units a
 
 MetaWorks runs at the command-line on linux x86-64 in a conda environment (provided).
 
-Instructions for installing [conda](https://terrimporter.github.io/MetaWorksSite/faq/) (if not already installed).
+Instructions for installing [conda](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallConda) (if not already installed).
 
-Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1) if pseudogene-filtering will be run (optional).
+Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallORFfinder) if pseudogene-filtering will be run (optional).
 
-Instructions for loading the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1).
+Instructions for installing [MetaWorks](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallMetaworks) and activating the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#ActivateMetaWorksEnv).
 
-Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/tutorial/#step1) that can be used with MetaWorks.
+Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/#classifier_table) that can be used with MetaWorks.
 
 ## Documentation
 
@@ -22,7 +22,7 @@ A [quickstart](https://terrimporter.github.io/MetaWorksSite/quickstart/) guide t
 
 A [detailed](https://terrimporter.github.io/MetaWorksSite/details/) explanation of MetaWorks workflows.
 
-A [tutorial](https://terrimporter.github.io/MetaWorksSite/tutorial/) using provided test data to get up and running quickly.
+A [tutorial](https://terrimporter.github.io/MetaWorksSite/tutorial/) provides step-by-step instructions on how to prepare your environment and get started quickly using the provided test data.
 
 *NEW* We added answers to some frequently asked questions (FAQs) about MetaWorks and data analysis to the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite/faq).
 
@@ -43,4 +43,4 @@ Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence anal
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: July 29, 2022
+Last updated: July 30, 2022
