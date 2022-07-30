@@ -12,7 +12,7 @@ Instructions for installing [conda](https://terrimporter.github.io/MetaWorksSite
 
 Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallORFfinder) if pseudogene-filtering will be run (optional).
 
-Instructions for installing [MetaWorks](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallMetaworks) and activating the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#ActivateMetaWorksEnv).
+Instructions for installing [MetaWorks](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallMetaWorks) and activating the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#ActivateMetaWorksEnv).
 
 Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/#classifier_table) that can be used with MetaWorks.
 
