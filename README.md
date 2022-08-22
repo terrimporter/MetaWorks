@@ -24,7 +24,7 @@ A [detailed](https://terrimporter.github.io/MetaWorksSite/details/) explanation 
 
 A [tutorial](https://terrimporter.github.io/MetaWorksSite/tutorial/) provides step-by-step instructions on how to prepare your environment and get started quickly using the provided test data.
 
-*NEW* We added answers to some frequently asked questions (FAQs) about MetaWorks and data analysis to the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite/faq).
+*NEW* We added answers to some [frequently asked questions (FAQs)](https://terrimporter.github.io/MetaWorksSite/faq) about MetaWorks and data analysis to the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite).
 
 ## How to cite
 
