@@ -28,8 +28,8 @@ A [tutorial](https://terrimporter.github.io/MetaWorksSite/tutorial/) provides st
 
 ## How to cite
 
-If you use this dataflow or any of the provided scripts, please cite the MetaWorks preprint:  
-Porter, T.M., Hajibabaei, M. 2020.  METAWORKS: A flexible, scalable bioinformatic pipeline for multi-marker biodiversity assessments.  BioRxiv, doi: https://doi.org/10.1101/2020.07.14.202960.
+If you use this dataflow or any of the provided scripts, please cite the MetaWorks paper:  
+Porter, T. M., & Hajibabaei, M. (2022). MetaWorks: A flexible, scalable bioinformatic pipeline for high-throughput multi-marker biodiversity assessments. PLOS ONE, 17(9), e0274260. doi: 10.1371/journal.pone.0274260
 
 You can also site this repository:
 Teresita M. Porter. (2020, June 25). MetaWorks: A Multi-Marker Metabarcode Pipeline (Version v1.10.0). Zenodo. http://doi.org/10.5281/zenodo.4741407 
@@ -43,4 +43,4 @@ Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence anal
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: July 30, 2022
+Last updated: September 30, 2022
