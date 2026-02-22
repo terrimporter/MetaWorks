@@ -6,19 +6,19 @@ MetaWorks generates exact sequence variants and/or operational taxonomic units a
 
 ## Docker Installation [Added 2026 02 22]
 
-Get docker image:
+Get docker image:  
 docker pull ghcr.io/terrimporter/metaworks:1.13.0
 
-Run container from docker image:
+Run container from docker image:  
 docker run -it metaworks/metaworks:1.13.0 /bin/bash
 
-Browse to MetaWorks directory:
+Browse to MetaWorks directory:  
 cd opt/tools/Metaworks1.13.0
 
-Activate conda environment:
+Activate conda environment:  
 conda activate MetaWorks_v1.13.0
 
-Run test script that uses the COI classifier:
+Run test script that uses the COI classifier:  
 snakemake --jobs 2 --snakefile snakefile_ESV --configfile config_testing_COI_data.yaml
 
 Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/#classifier_table) that can be used with MetaWorks.
