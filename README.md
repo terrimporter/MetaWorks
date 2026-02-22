@@ -21,17 +21,6 @@ conda activate MetaWorks_v1.13.0
 Run test script that uses the COI classifier:
 snakemake --jobs 2 --snakefile snakefile_ESV --configfile config_testing_COI_data.yaml
 
-
-## Installation
-
-MetaWorks runs at the command-line on linux x86-64 in a conda environment (provided).
-
-Instructions for installing [conda](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallConda) (if not already installed).
-
-Instructions for installing [ORFfinder](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallORFfinder) if pseudogene-filtering will be run (optional).
-
-Instructions for installing [MetaWorks](https://terrimporter.github.io/MetaWorksSite/tutorial/#InstallMetaWorks) and activating the [MetaWorks conda environment](https://terrimporter.github.io/MetaWorksSite/tutorial/#ActivateMetaWorksEnv).
-
 Instructions on where to find [custom-trained classifiers](https://terrimporter.github.io/MetaWorksSite/#classifier_table) that can be used with MetaWorks.
 
 ## Documentation
