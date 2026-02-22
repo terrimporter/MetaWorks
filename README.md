@@ -4,6 +4,24 @@
 
 MetaWorks generates exact sequence variants and/or operational taxonomic units and taxonomically assigns them.  Supports a number of popular metabarcoding markers: COI, rbcL, ITS, SSU rRNA, and 12S SSU mtDNA.  See the [MetaWorks website](https://terrimporter.github.io/MetaWorksSite) for quickstart guides, additional pipeline details, FAQs, and a step-by-step tutorial that includes installation.
 
+## Docker Installation [Added 2026 02 22]
+
+Get docker image:
+docker pull ghcr.io/terrimporter/metaworks:1.13.0
+
+Run container from docker image:
+docker run -it metaworks/metaworks:1.13.0 /bin/bash
+
+Browse to MetaWorks directory:
+cd opt/tools/Metaworks1.13.0
+
+Activate conda environment:
+conda activate MetaWorks_v1.13.0
+
+Run test script that uses the COI classifier:
+snakemake --jobs 2 --snakefile snakefile_ESV --configfile config_testing_COI_data.yaml
+
+
 ## Installation
 
 MetaWorks runs at the command-line on linux x86-64 in a conda environment (provided).
