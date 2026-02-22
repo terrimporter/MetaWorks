@@ -43,4 +43,4 @@ Porter, T.M., & Hajibabaei, M. (2021). Profile hidden Markov model sequence anal
 If you use the RDP classifier, please cite the publication:  
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. doi:10.1128/AEM.00062-07  
 
-Last updated: September 30, 2022
+Last updated: 2026 02 22
