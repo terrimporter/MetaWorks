@@ -10,7 +10,7 @@ Get docker image:
 docker pull ghcr.io/terrimporter/metaworks:1.13.0
 
 Run container from docker image:  
-docker run -it ghcr.io/terrimporter/metaworks:1.13.0 /bin/bash
+docker run --platform linux/amd64 -it ghcr.io/terrimporter/metaworks:1.13.0 /bin/bash
 
 Browse to MetaWorks directory:  
 cd opt/tools/Metaworks1.13.0
